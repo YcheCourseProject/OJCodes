@@ -1,0 +1,11 @@
+.idea
+*.pyc
+*.class
+target
+output*.txt
+*.pcap
+*.swf
+*.iml
+*.proto
+*.thirft
+root
