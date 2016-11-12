@@ -7,10 +7,6 @@
 
 using namespace std;
 
-void PrintMD5(const string &message) {
-    cout << "md5(\"" << message << "\") = " << MD5(message).toStr() << endl;
-}
-
 void TestMD5() {
     PrintMD5("");
     PrintMD5("a");

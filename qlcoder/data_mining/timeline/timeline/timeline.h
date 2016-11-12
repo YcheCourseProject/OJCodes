@@ -23,7 +23,11 @@ constexpr int PRIME_COUNT = 221374;
 constexpr int V_COUNT = 6666666;
 constexpr int P_COUNT = 3333334;
 
+void PrintMD5(const string &message);
+
 vector<string> my_split(const string &s, char deliminiter);
+
+std::string &trim_right_end(std::string &s);
 
 auto cmp = [](pair<int, string> left, pair<int, string> right) -> bool { return left.first < right.first; };
 
