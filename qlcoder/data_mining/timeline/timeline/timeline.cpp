@@ -92,17 +92,14 @@ void TimeLine::VerboseMessage(int entity_id) {
     if (idx_pairs_[entity_id].second >= idx_pairs_[entity_id].first) {
         vector<pair<int, string>> union_vec;
         vector<pair<int, string>> filtered_vec;
-        if (non_prime_message_lists_[entity_id].size() > 0) {
-            cout << "attention V" << endl;
-        }
-//        cout << "V size:" << idx_pairs_[entity_id].second - idx_pairs_[entity_id].first + 1 << endl;
-        for (auto i = idx_pairs_[entity_id].first; i < idx_pairs_[entity_id].second + 1; i++) {
+        for (auto i = idx_pairs_[entity_id].first; i <= idx_pairs_[entity_id].second; i++) {
             if (global_prime_msg_mapping_list_[i] > entity_id) {
                 filtered_vec.push_back(global_prime_msg_list_[i]);
             }
         }
         set_union(non_prime_message_lists_[entity_id].begin(), non_prime_message_lists_[entity_id].end(),
                   filtered_vec.begin(), filtered_vec.end(), back_inserter(union_vec), cmp);
+        reverse(union_vec.begin(), union_vec.end());
         global_md5_string_list_.push_back(GetListMd5(union_vec));
         idx_pairs_[entity_id].first = static_cast<int>(global_prime_msg_list_.size());
     } else {
@@ -122,13 +119,10 @@ string TimeLine::GetAnswer() {
         if (time_stamp_ == 99 || time_stamp_ == 299 || time_stamp_ == 311 || time_stamp_ == 312 ||
             time_stamp_ == 999 || time_stamp_ == 23030 || time_stamp_ == 50000 - 1 || time_stamp_ == 66665 ||
             time_stamp_ == 100000 - 1) {
-//            for(auto& ele:global_md5_string_list_)
-//            {
-//                cout <<ele<<"-";
-//            }
             cout << endl << "timestamp:" << time_stamp_ << ":" << GetListMd5(global_md5_string_list_) << endl;
-        } else if (time_stamp_ > 1000)
-            return "";
+        }
+        if (time_stamp_ % 100000 == 0)
+            cout << "in step:" << time_stamp_ << endl;
         time_stamp_++;
     }
     return GetListMd5(global_md5_string_list_);

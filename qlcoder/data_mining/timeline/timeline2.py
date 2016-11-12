@@ -39,11 +39,13 @@ def verbose_time_line(vertex_index):
         global_digest_list.append(hashlib.md5("").hexdigest())
     else:
         vertex_list[vertex_index].reverse()
+        print '-'.join(vertex_list[vertex_index])
         if len(vertex_list[vertex_index]) == 1:
             global_digest_list.append(hashlib.md5(vertex_list[vertex_index][0]).hexdigest())
         else:
             global_digest_list.append(compute_md5(vertex_list[vertex_index]))
         vertex_list[vertex_index] = list()
+
 
 
 def notify_message(vertex_index, message_str):
@@ -68,8 +70,10 @@ if __name__ == '__main__':
         else:
             verbose_time_line(r)
         if i == 99 or i == 299 or i == 999 or i == 23030 or i == 49999 or i == 66665 or i == 100000 - 1:
-            print '-'.join(global_digest_list)+':'
+            print '-'.join(global_digest_list) + ':'
             print str(i) + ':' + compute_md5(global_digest_list)
+        if i == 1000:
+            break
         if i % 100000 == 0:
             print i
 
