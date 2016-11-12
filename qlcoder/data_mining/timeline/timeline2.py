@@ -68,6 +68,7 @@ if __name__ == '__main__':
         else:
             verbose_time_line(r)
         if i == 99 or i == 299 or i == 999 or i == 23030 or i == 49999 or i == 66665 or i == 100000 - 1:
+            print '-'.join(global_digest_list)+':'
             print str(i) + ':' + compute_md5(global_digest_list)
         if i % 100000 == 0:
             print i

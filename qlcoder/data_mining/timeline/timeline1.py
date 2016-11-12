@@ -53,6 +53,9 @@ for i in range(limit):
     else:
         verbose_time_line(r)
 
+    if i == 99 or i == 299 or i == 999 :
+        print '-'.join(global_digest_list) + ':'
+        print str(i) + ':' + compute_md5(global_digest_list)
 print 'Over'
 
 print compute_md5(global_digest_list)

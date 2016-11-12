@@ -16,13 +16,17 @@ vector<string> my_split(const string &s, char deliminiter) {
 }
 
 TimeLine::TimeLine() {
-    non_prime_message_lists_.resize(10000000);
+    prime_number_set_.reserve(PRIME_COUNT);
+    global_prime_msg_list_.reserve(PRIME_COUNT);
+    global_md5_string_list_.reserve(V_COUNT);
+    non_prime_message_lists_.resize(NUM_COUNT + 1);
+    idx_pairs_.resize(NUM_COUNT + 1, std::move(pair<int, int>(0, -1)));
+
     ifstream input_stream(TIME_LINE_FILE_NAME);
     string line;
     while (getline(input_stream, line)) {
         global_msg_list_.push_back(line);
     }
-
 
     ifstream input_stream2(PRIME_FILE_NAME);
     while (input_stream2.good()) {
@@ -30,25 +34,34 @@ TimeLine::TimeLine() {
         input_stream2 >> number_line;
         prime_number_set_.insert(number_line);
     }
-
-    idx_pairs_.resize(10000000, std::move(pair<int, int>(0, -1)));
 }
 
 string TimeLine::GetAnswer() {
-    int time_stamp = 0;
     for (auto &str:global_msg_list_) {
         vector<string> my_vec = my_split(str, ' ');
         if (my_vec[0] == "p") {
             PostMessage(stoi(my_vec[1]), my_vec[2]);
         } else {
-            GetMessage(stoi(my_vec[1]));
+            VerboseMessage(stoi(my_vec[1]));
         }
-        time_stamp++;
+        time_stamp_++;
+        if (time_stamp_ == 99 || time_stamp_ == 100 || time_stamp_ == 299 || time_stamp_ == 300 || time_stamp_ == 312 ||
+            time_stamp_ == 311 ||
+            time_stamp_ == 1000 || time_stamp_ == 999)
+        {
+            for(auto&ele:global_md5_string_list_)
+                cout << ele<<"-";
+
+            cout <<endl;
+            cout <<"timestamp:"<< time_stamp_<<":"<<GetListMd5(global_md5_string_list_) << endl;
+        }
+        else if (time_stamp_ > 1000)
+            return "";
     }
     return GetListMd5(global_md5_string_list_);
 }
 
-string TimeLine::GetListMd5(list <string> &string_list) {
+string TimeLine::GetListMd5(vector<string> &string_list) {
     stringstream ss;
     if (string_list.size() > 0) {
         for (auto ele:string_list) {
@@ -60,13 +73,57 @@ string TimeLine::GetListMd5(list <string> &string_list) {
     } else {
         return MD5("").toStr();
     }
-
 }
 
-void TimeLine::PostMessage(int entity_id, string message) {
-
+string TimeLine::GetListMd5(vector<TimeLine::MessageType> &message_list) {
+    stringstream ss;
+    if (message_list.size() > 0) {
+        for (auto ele:message_list) {
+            ss << ele.second << '-';
+        }
+        string tmp_str = ss.str();
+        tmp_str = tmp_str.substr(0, tmp_str.size() - 1);
+        return MD5(tmp_str).toStr();
+    } else {
+        return MD5("").toStr();
+    }
 }
 
-void TimeLine::GetMessage(int entity_id) {
 
+void TimeLine::PostMessage(int entity_id, string &message) {
+    if (prime_number_set_.find(entity_id) != prime_number_set_.end()) {
+        cout << "Prime P, timestamp:" << time_stamp_ << endl;
+        global_prime_msg_list_.push_back(make_pair(time_stamp_, message));
+        global_prime_msg_mapping_list_.push_back(entity_id);
+        cout <<"global size:"<<global_prime_msg_list_.size()<<endl;
+        for (auto smaller_idx = 1; smaller_idx < entity_id; smaller_idx++) {
+            idx_pairs_[smaller_idx].second = static_cast<int>(global_prime_msg_list_.size() - 1);
+        }
+    }
+
+    for (auto times_count = 2; times_count * entity_id < NUM_COUNT + 1; times_count++) {
+        non_prime_message_lists_[times_count * entity_id].push_back(make_pair(time_stamp_, message));
+    }
 }
+
+void TimeLine::VerboseMessage(int entity_id) {
+    if (idx_pairs_[entity_id].second >= idx_pairs_[entity_id].first + 1) {
+        vector<pair<int, string>> union_vec;
+        vector<pair<int, string>> filtered_vec;
+        cout << "V size:" << idx_pairs_[entity_id].second - idx_pairs_[entity_id].first + 1;
+        for (auto i = idx_pairs_[entity_id].first; i < idx_pairs_[entity_id].second + 1; i++) {
+            if (global_prime_msg_mapping_list_[i] > entity_id) {
+                filtered_vec.push_back(global_prime_msg_list_[i]);
+            }
+        }
+        cout << "filtered size:"<<filtered_vec.size()<<endl;
+        set_union(non_prime_message_lists_[entity_id].begin(), non_prime_message_lists_[entity_id].end(),
+                  filtered_vec.begin(), filtered_vec.end(), back_inserter(union_vec), cmp);
+        global_md5_string_list_.push_back(GetListMd5(union_vec));
+        idx_pairs_[entity_id].first = static_cast<int>(global_prime_msg_list_.size());
+    } else {
+        global_md5_string_list_.push_back(GetListMd5(non_prime_message_lists_[entity_id]));
+    }
+    non_prime_message_lists_[entity_id].clear();
+}
+
