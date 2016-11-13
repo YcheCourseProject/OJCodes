@@ -83,6 +83,7 @@ void TimeLine::PostMessage(int entity_id, string &message) {
         }
     }
 
+#pragma omp parallel for num_threads(10)
     for (auto times_count = 2; times_count * entity_id < NUM_COUNT + 1; times_count++) {
         non_prime_message_lists_[times_count * entity_id].push_back(make_pair(time_stamp_, message));
     }
@@ -103,6 +104,7 @@ void TimeLine::VerboseMessage(int entity_id) {
         global_md5_string_list_.push_back(GetListMd5(union_vec));
         idx_pairs_[entity_id].first = static_cast<int>(global_prime_msg_list_.size());
     } else {
+        reverse(non_prime_message_lists_[entity_id].begin(), non_prime_message_lists_[entity_id].end());
         global_md5_string_list_.push_back(GetListMd5(non_prime_message_lists_[entity_id]));
     }
     non_prime_message_lists_[entity_id].clear();
