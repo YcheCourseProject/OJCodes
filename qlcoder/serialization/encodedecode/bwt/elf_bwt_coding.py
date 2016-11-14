@@ -14,12 +14,10 @@ def bwt(string, slice_len):
 
 
 with open("war_and_peace.txt") as f:
-    data = f.read()
-    print len(data)
-    with open("out_war_and_peace.txt", 'w') as out_f:
-        arr = bwt(data, 100)
-        arr.sort(lambda ele_left, ele_right: -1 if ele_left[0] < ele_right[0] else 0)
-        after_map_arr = map(lambda ele: ele[1], arr)
-        reduced_str = ''.join(after_map_arr)
-        print len(reduced_str)
-        print hashlib.md5(reduced_str).hexdigest()
+    data = f.readline()
+    print 'start bwt with slicing comparison not whole'
+    arr = bwt(data, 70)
+    arr.sort(lambda ele_left, ele_right: -1 if ele_left[0] < ele_right[0] else 0)
+    after_map_arr = map(lambda ele: ele[1], arr)
+    reduced_str = ''.join(after_map_arr)
+    print hashlib.md5(reduced_str).hexdigest()

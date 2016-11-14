@@ -18,42 +18,32 @@ def get_encoded_bwt_str():
     return decode_game_coding(line)
 
 
-def encode_str_bwt(old_str):
-    arr = []
-    idx = 0
-    for ele in old_str:
-        arr.append([ele, idx])
-        idx += 1
-    print arr
-    arr.sort(lambda left, right: ord(left[0]) - ord(right[0]))
-    print arr
-    encoded_str = ''.join(map(lambda ele: ele[0], arr))
-    return encoded_str
-
-
-print 'old:', old
-encoded_str = encode_str_bwt(old)
-print 'encoded:', encoded_str
-
-print get_encoded_bwt_str()
-with open('bwt_intermediate.txt', 'w') as ofs:
-    ofs.write(get_encoded_bwt_str())
-
-
 def ibwt(r):
-    """Apply inverse Burrows-Wheeler transform."""
-    table = [""] * len(r)  # Make empty table
+    firstCol = "".join(sorted(r))
+    count = [0] * 256
+    byteStart = [-1] * 256
+    output = [""] * len(r)
+    shortcut = [None] * len(r)
+    # Generates shortcut lists
     for i in range(len(r)):
-        table = sorted(r[i] + table[i] for i in range(len(r)))  # Add a column of r
-    s = [row for row in table if row.endswith(" ")][0]  # Find the correct row (ending in "\0")
-    return s.rstrip(" ")  # Get rid of trailing null character
+        shortcutIndex = ord(r[i])
+        shortcut[i] = count[shortcutIndex]
+        count[shortcutIndex] += 1
+        shortcutIndex = ord(firstCol[i])
+        if byteStart[shortcutIndex] == -1:
+            byteStart[shortcutIndex] = i
+
+    localIndex = (r.index("|"))
+    for i in range(len(r)):
+        # takes the next index indicated by the transformation vector
+        nextByte = r[localIndex]
+        output[len(r) - i - 1] = nextByte
+        shortcutIndex = ord(nextByte)
+        # assigns localIndex to the next index in the transformation vector
+        localIndex = byteStart[shortcutIndex] + shortcut[localIndex]
+    return "".join(output).rstrip("|")
 
 
-print encode_str_bwt('SIX.MIXED.PIXIES.SIFT.SIXTY.PIXIE.DUST.BOXES')
-print ibwt(get_encoded_bwt_str())
-
-# id = 0
-# new = ""
-# while True:
-#     new += a[id][0];
-#     id = a[id][1];
+with open('output_bwt.txt', 'w') as ofs:
+    answer = ibwt(get_encoded_bwt_str())
+    ofs.write(answer)
