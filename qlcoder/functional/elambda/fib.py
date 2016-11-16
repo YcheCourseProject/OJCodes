@@ -80,5 +80,10 @@ print yche_pow(2, 0)
 print fib(10)
 print naive_fib(10)
 print 'fib demo:'
-for i in range(12):
-    print fast_fib(i),
+# for i in range(12):
+#     print fast_fib(i),
+# print fast_fib(1000)pei_fib
+#
+# print fib(1000000)
+
+# print pei_fib(1000000,1,1,1,1)
