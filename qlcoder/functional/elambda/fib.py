@@ -51,6 +51,27 @@ def naive_fib(n):
         return naive_fib(n - 1) + naive_fib(n - 2)
 
 
+def fib_mat_pow(pow_num, idx):
+    if pow_num < 2:
+        return 1
+    else:
+        a = fib_mat_pow(pow_num / 2, 0)
+        b = fib_mat_pow(pow_num / 2, 1)
+        a_plus = fib_mat_pow((pow_num + 1) / 2, 0)
+        b_plus = fib_mat_pow((pow_num + 1) / 2, 1)
+        if idx < 1:
+            return a * a_plus + b * b_plus
+        else:
+            return a * b_plus + b * a_plus - b * b_plus
+
+
+def fast_fib(idx):
+    if idx < 2:
+        return idx
+    else:
+        return fib_mat_pow(idx - 1, 0)
+
+
 print q_pow(2, 4)
 print yche_pow(2, 4)
 print yche_pow(2, 5)
@@ -58,3 +79,6 @@ print yche_pow(2, 0)
 
 print fib(10)
 print naive_fib(10)
+print 'fib demo:'
+for i in range(12):
+    print fast_fib(i),
