@@ -62,7 +62,7 @@ def fib_mat_pow(pow_num, idx):
         if idx < 1:
             return a * a_plus + b * b_plus
         else:
-            return a * b_plus + b * a_plus - b * b_plus
+            return a * b_plus + b * (a_plus - b_plus)
 
 
 def fast_fib(idx):

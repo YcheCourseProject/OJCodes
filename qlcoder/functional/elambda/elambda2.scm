@@ -30,7 +30,7 @@
      (cond
        ((< pow_num 2) 1)
      (else
-       ((((((lambda (a)(lambda (b)(lambda (ap)(lambda (bp)
+       (((((lambda (a)(lambda (b)(lambda (ap)(lambda (bp)
               (cond
                 ((< idx 1) (+ (* a ap) (* b bp)))
               (else
@@ -38,6 +38,6 @@
             ((fib_mat_pow (/ pow_num 2)) 0))
           ((fib_mat_pow (/ pow_num 2)) 1))
         ((fib_mat_pow (/ (+ pow_num 1) 2)) 0))
-      ((fib_mat_pow (/ (+ pow_num 1) 2)) 1)))))))))
+      ((fib_mat_pow (/ (+ pow_num 1) 2)) 1))))))))
 
 (((Y fib_callable) 10) 0)

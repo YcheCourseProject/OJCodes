@@ -1,10 +1,8 @@
 (\f.
   (\x.(f \v.((x x) v))
      \x.(f \v.((x x) v)))
-       \fact.
-        \n.
-          (((cond
-              ((less n) 1))
-                  \_.1)
-                    \_.((mul n) (fact ((sub n) 1)))
-))
+\fact.
+  \n.
+    (((cond ((less n) 1))
+        \_.1)
+        \_.((mul n) (fact ((sub n) 1)))))
