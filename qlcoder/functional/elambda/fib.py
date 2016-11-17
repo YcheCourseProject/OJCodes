@@ -87,3 +87,4 @@ print 'fib demo:'
 # print fib(1000000)
 
 # print pei_fib(1000000,1,1,1,1)
+print yche_matrix_pow([[1,1],[1,0]],4)
