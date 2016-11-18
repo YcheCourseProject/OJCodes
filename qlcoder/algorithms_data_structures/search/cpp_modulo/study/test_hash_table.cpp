@@ -10,7 +10,7 @@
 
 using namespace std;
 
-hash<string> str_hash_func_obj;
+hash<string> yche_hash_func_obj;
 
 namespace std {
     template<>
@@ -22,7 +22,7 @@ namespace std {
                     ss << col;
                 }
             }
-            return str_hash_func_obj(ss.str());
+            return yche_hash_func_obj(ss.str());
         }
     };
 }
@@ -77,7 +77,19 @@ void StudyHashMap() {
     }
 }
 
+void StudyVector() {
+    vector<int> my_vec;
+    my_vec.reserve(10);
+    for (auto i = 0; i < 5; i++)
+        my_vec.push_back(i);
+    my_vec.pop_back();
+    for (auto ele:my_vec) {
+        cout << ele << endl;
+    }
+}
+
 int main() {
     StudyHashSet();
     StudyHashMap();
+    StudyVector();
 }
