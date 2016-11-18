@@ -65,6 +65,13 @@ def http_request_submit_answer(sol_str):
     print html_str
 
 
+def grid_to_str(map_arr):
+    to_print_map = list()
+    for ele in map_arr:
+        to_print_map.append(''.join(map(str, ele)))
+    return ';'.join(to_print_map)
+
+
 def execute_answer():
     my_json_dict = http_request_get_dict()
     modulo_num = int(my_json_dict['modu'])
@@ -83,17 +90,25 @@ def execute_answer():
     piece_sum_list = map(lambda ele: ele[2], extended_pieces_tuple_info)
     left_cells = reduce(lambda x, y: x + y, piece_sum_list)
 
-    print 'left cells:', left_cells, 'modulo_num:', modulo_num, ',map_row:', map_row, ', map_col:', map_col, \
-        ', map_info:', map_arr, ', pieces:', pieces_list, ', pieces sum:', piece_sum_list, \
-        'num_of_pieces:', len(pieces_list)
+    arg_list = list()
+    arg_list.append(str(modulo_num))
+    arg_list.append(grid_to_str(map_arr))
+    for piece in pieces_list:
+        arg_list.append(grid_to_str(piece))
+    arg_params = ' '.join(arg_list)
+    print arg_params
+    # print 'left cells:', left_cells, 'modulo_num:', modulo_num, ',map_row:', map_row, ', map_col:', map_col, \
+    #     ', map_info:', map_arr, ', pieces:', pieces_list, ', pieces sum:', piece_sum_list, \
+    #     'num_of_pieces:', len(pieces_list)
 
-    path_list = list()
-    print modulo.fixed_depth_search(0, left_cells, path_list, pieces_list, piece_sum_list, map_arr, modulo_num)
+    # path_list = list()
+    # print modulo.fixed_depth_search(0, left_cells, path_list, pieces_list, piece_sum_list, map_arr, modulo_num)
 
-    sol_str = reorder_and_print_path(path_list, piece_index_list)
-    http_request_submit_answer(sol_str)
+    # sol_str = reorder_and_print_path(path_list, piece_index_list)
+    # http_request_submit_answer(sol_str)
 
 
 if __name__ == '__main__':
-    for i in range(1, 40):
-        execute_answer()
+    # for i in range(1, 40):
+    #     execute_answer()
+    execute_answer()

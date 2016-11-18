@@ -5,43 +5,44 @@
 #ifndef CPP_MODULO_MODULOSOLVER_H
 #define CPP_MODULO_MODULOSOLVER_H
 
+#include <iostream>
+#include <sstream>
 #include <vector>
 #include <list>
+#include <string>
 
 using namespace std;
 
-using PieceMatrixType=vector<vector<unsigned char>>;
-using ModuloGridType = vector<vector<unsigned char>>;
-
-
-struct PieceInfo {
-    PieceMatrixType piece_matrix_;
-    int piece_counts_;
-
-    PieceInfo(const PieceMatrixType &piece_matrix,
-              int piece_counts) : piece_matrix_(piece_matrix), piece_counts_(piece_counts) {}
-};
-
-
-struct GridInfo {
-
-};
-
-
-struct TmpGridInfo : public GridInfo {
-
-};
+using MatrixType = vector<vector<unsigned char>>;
 
 class ModuloSolver {
 public:
 
 private:
-    int row_num_;
-    int col_num_;
-    int init_marked_num_;
-    ModuloSolver modulo_grid_;
+    int modulo_num_;
+    int grid_row_;
+    int grid_col_;
+    MatrixType modulo_grid_;
+    vector<MatrixType> pieces_;
+    vector<int> pieces_sum_;
 
-    bool DepthFirstSearch(int depth, ModuloGridType &my_map_arr);
+    int marked_num_;
+
+    vector<string> Split(const string &s, char delim);
+
+    MatrixType ExtractMatrix(string &matrix_str);
+
+    void PrintMatrix(const MatrixType &matrix, string msg = string(""));
+
+    int GetMatrixSum(const MatrixType &matrix);
+
+    int GetPieceStateSize(const MatrixType &matrix);
+
+public:
+    ModuloSolver(int modulo_num, string &grid_str, vector<string> &piece_strs);
+
+private:
+    bool DepthFirstSearch(int depth, MatrixType &my_map_arr);
 };
 
 
