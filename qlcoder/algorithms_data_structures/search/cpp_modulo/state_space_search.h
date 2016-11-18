@@ -11,7 +11,7 @@
 using namespace std;
 
 using PieceMatrixType=vector<vector<unsigned char>>;
-using ModuloMapType = vector<vector<unsigned char>>;
+using ModuloGridType = vector<vector<unsigned char>>;
 
 
 struct PieceInfo {
@@ -22,6 +22,16 @@ struct PieceInfo {
               int piece_counts) : piece_matrix_(piece_matrix), piece_counts_(piece_counts) {}
 };
 
+
+struct GridInfo {
+
+};
+
+
+struct TmpGridInfo : public GridInfo {
+
+};
+
 class ModuloSolver {
 public:
 
@@ -29,9 +39,9 @@ private:
     int row_num_;
     int col_num_;
     int init_marked_num_;
-    ModuloSolver modulo_map_;
+    ModuloSolver modulo_grid_;
 
-    bool DepthFirstSearch(int depth, ModuloMapType &my_map_arr);
+    bool DepthFirstSearch(int depth, ModuloGridType &my_map_arr);
 };
 
 

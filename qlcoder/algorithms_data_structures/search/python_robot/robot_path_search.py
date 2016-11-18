@@ -30,9 +30,8 @@ def execute_answer():
     # time.sleep(5)
     print params_dict
     os.system(
-        './cpp_robot/build/cpp_robot ' + str(params_dict['row_num']) + ' ' + str(params_dict['col_num']) + ' ' +
-        params_dict[
-            'map_info'] + '>output_res.txt')
+        '../cpp_robot/build/cpp_robot ' + str(params_dict['row_num']) + ' ' + str(params_dict['col_num']) + ' ' +
+        params_dict['map_info'] + '>output_res.txt')
     new_url = str()
     with open('output_res.txt') as fs:
         content = fs.readlines()
