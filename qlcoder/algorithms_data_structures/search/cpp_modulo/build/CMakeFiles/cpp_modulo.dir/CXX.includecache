@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/cheyulin/GitRepos/OJCodes/qlcoder/algorithms_data_structures/search/cpp_modulo/main.cpp
+iostream
+-
+state_space_search.h
+/home/cheyulin/GitRepos/OJCodes/qlcoder/algorithms_data_structures/search/cpp_modulo/state_space_search.h
+
+/home/cheyulin/GitRepos/OJCodes/qlcoder/algorithms_data_structures/search/cpp_modulo/state_space_search.cpp
+state_space_search.h
+/home/cheyulin/GitRepos/OJCodes/qlcoder/algorithms_data_structures/search/cpp_modulo/state_space_search.h
+
+/home/cheyulin/GitRepos/OJCodes/qlcoder/algorithms_data_structures/search/cpp_modulo/state_space_search.h
+iostream
+-
+sstream
+-
+vector
+-
+list
+-
+string
+-
+unordered_map
+-
+

@@ -37,6 +37,8 @@ namespace std {
 
 class ModuloSolver {
 public:
+    void GetAnswer();
+
     ModuloSolver(int modulo_num, string &grid_str, vector<string> &piece_strs);
 
 private:
@@ -49,6 +51,8 @@ private:
     vector<MatrixType> pieces_;
     vector<int> pieces_sum_;
     int check_depth_;
+    int max_possible_cell_num_;
+    int min_possible_cell_num_;
 
     LookupMapType look_up_grids_;
 
@@ -67,9 +71,13 @@ private:
     void PrintInitInfo();
 
     void DFSBuildMap(int depth, MatrixType &tmp_grid,
-                     vector<pair<unsigned char, unsigned char>> &node_info);
+                     vector<pair<unsigned char, unsigned char>> &path_list);
 
-    bool DFSLookup(int depth, MatrixType &my_map_arr);
+    int GetLeftNumsCount(const MatrixType &my_map_arr);
+
+    bool DFSLookup(int depth, int left_cells, vector<pair<unsigned char, unsigned char>> &path_list, MatrixType &my_map_arr);
+
+
 };
 
 

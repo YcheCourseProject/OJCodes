@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/cheyulin/GitRepos/OJCodes/qlcoder/algorithms_data_structures/search/cpp_modulo/study/test_hash_table.cpp
+iostream
+-
+sstream
+-
+vector
+-
+unordered_set
+-
+unordered_map
+-
+
