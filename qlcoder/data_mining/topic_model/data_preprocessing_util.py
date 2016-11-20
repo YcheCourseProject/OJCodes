@@ -31,8 +31,9 @@ def generate_whole_corpus_file():
             for root, dir, files in walk:
                 for file_name in files:
                     my_path = root + '/' + file_name
-                    line_list[file_name.rstrip('.txt')] = extract_key_words(my_path)
-                    all_words_list.append(extract_all_words(my_path))
+                    if '.txt' in file_name:
+                        line_list[file_name.rstrip('.txt')] = extract_key_words(my_path)
+                        all_words_list.append(extract_all_words(my_path))
             ofs.write(str(line_list))
             ofs_all.write(str(all_words_list))
 
