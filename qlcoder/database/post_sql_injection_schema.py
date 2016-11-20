@@ -80,7 +80,7 @@ def check_db_name():
 
 
 # qlcoder is the database
-# company, title, avatar%, password, email, created_at, updated_at, remember_token, location, score
+# company, title, avatar%, password, email, created_at, updated_at, remember_token, location, score, solveNum, msgcnt, rank, utm, active
 def check_schema():
     all_rows = []
     is_all_recorded = False
