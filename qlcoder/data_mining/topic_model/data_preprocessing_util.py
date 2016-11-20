@@ -12,6 +12,7 @@ sys.setdefaultencoding("utf8")
 stop_words_set = {}
 stop_file_name = 'cn_stop_words.txt'
 res_output_file_name = 'output_whole_corpus.txt'
+res_output_all_words_file_name = 'output_all_words.txt'
 bad_info_file_name = 'output_bad_info.txt'
 
 
@@ -22,14 +23,18 @@ def init_stop_words_set(file_name):
 
 
 def generate_whole_corpus_file():
-    with open(res_output_file_name, 'w') as ofs:
-        walk = os.walk('./8000')
-        line_list = {}
-        for root, dir, files in walk:
-            for file_name in files:
-                my_path = root + '/' + file_name
-                line_list[file_name.rstrip('.txt')] = extract_key_words(my_path)
-        ofs.write(str(line_list))
+    with open(res_output_all_words_file_name, 'w') as ofs_all:
+        with open(res_output_file_name, 'w') as ofs:
+            walk = os.walk('./8000')
+            line_list = {}
+            all_words_list = []
+            for root, dir, files in walk:
+                for file_name in files:
+                    my_path = root + '/' + file_name
+                    line_list[file_name.rstrip('.txt')] = extract_key_words(my_path)
+                    all_words_list.append(extract_all_words(my_path))
+            ofs.write(str(line_list))
+            ofs_all.write(str(all_words_list))
 
 
 def is_filtered_pattern(your_str):
@@ -39,18 +44,32 @@ def is_filtered_pattern(your_str):
     if re.match('[a-zA-Z]+', your_str):
         return True
     if your_str in stop_words_set:
-        # print your_str
+        return True
+    if re.match('.*[\r|\n]].*', your_str):
+        return True
+    if re.match('.* .*', your_str):
         return True
 
 
 def extract_key_words(input_file_name):
-    with open(input_file_name, 'r') as ifs:
+    with open(input_file_name) as ifs:
         lines = ifs.readlines()
         line = '\n'.join(lines)
         key_words = jieba.analyse.extract_tags(line, topK=20)
         # print key_words
         key_words = filter(lambda ele: not is_filtered_pattern(ele), key_words)
         return key_words
+
+
+def extract_all_words(input_file_name):
+    with open(input_file_name) as ifs:
+        lines = ifs.readlines()
+        ret_all_words = []
+        for line in lines:
+            all_words = jieba.analyse.extract_tags(line, topK=15)
+            all_words = filter(lambda ele: not is_filtered_pattern(ele), all_words)
+            ret_all_words.extend(all_words)
+        return ret_all_words
 
 
 def read_file_get_dict():
@@ -85,6 +104,13 @@ def return_useful_words_list():
         if ele not in bad_set:
             words_list.append(my_dict[ele])
     return words_list
+
+
+def return_all_words():
+    with open(res_output_all_words_file_name) as ifs:
+        eval_str = ifs.readline()
+        arr = eval(eval_str)
+        return arr
 
 
 if __name__ == '__main__':
