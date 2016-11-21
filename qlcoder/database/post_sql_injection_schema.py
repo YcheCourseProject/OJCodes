@@ -167,8 +167,8 @@ def check_strings():
     for row_idx in range(1, 1000):
         tmp_cols = []
         for col_idx in range(1, 1000):
-            small_idx = 32
-            large_idx = 127
+            small_idx = 0
+            large_idx = 255
             is_end = False
             while True:
                 query_str = generate_query_str(

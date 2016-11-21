@@ -97,6 +97,14 @@ def find_bad_things():
     return set(bad_list)
 
 
+def return_all_key_words():
+    my_dict = read_file_get_dict()
+    words_list = []
+    for ele in my_dict:
+        words_list.append(my_dict[ele])
+    return words_list
+
+
 def return_useful_words_list():
     my_dict = read_file_get_dict()
     bad_set = find_bad_things()
