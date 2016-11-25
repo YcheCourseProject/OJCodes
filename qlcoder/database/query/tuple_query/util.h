@@ -12,7 +12,7 @@
 #include <list>
 #include <iostream>
 
-#include "prettyprint.h"
+#include "pretty_print.h"
 
 using namespace std;
 

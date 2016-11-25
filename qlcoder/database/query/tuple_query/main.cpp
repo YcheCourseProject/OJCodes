@@ -38,6 +38,15 @@ void InitQueryList(vector<QueryInfo> &query_list) {
     }
 }
 
+bool CheckSingleTuple(TupleInfo &tuple, QueryInfo &query_info) {
+
+}
+
+int CheckMatchNumber(vector<TupleInfo> &tuple_list, unordered_map<string, vector<long>> &tag_indices,
+                     QueryInfo &query_info) {
+    
+}
+
 int main() {
     unordered_map<string, vector<long>> tag_indices;
     vector<TupleInfo> tuple_list;
