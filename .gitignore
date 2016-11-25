@@ -9,3 +9,8 @@ output*.txt
 *.proto
 *.thirft
 root
+.gitignore
+item_gen.py
+query_gen.py
+solr_data.csv
+solr_query.txt
