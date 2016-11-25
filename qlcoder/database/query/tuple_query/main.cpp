@@ -1,39 +1,54 @@
-#include <tuple>
-#include <iostream>
+#include <unordered_map>
 #include <fstream>
 
-#include "prettyprint.h"
-#include "util.h"
+#include "tuple_info.h"
+#include "query_info.h"
 
 using namespace std;
 
-auto get_tuple_with_str(string &my_tuple_str) {
-    auto my_cols = Split(my_tuple_str, ',');
-    auto tags = Split(my_cols[my_cols.size() - 1], ' ');
-    return make_tuple(stol(my_cols[0]), stoi(my_cols[1]), stoi(my_cols[2]), stoi(my_cols[3]), my_cols[4], my_cols[5],
-                      stoi(my_cols[6]), stol(my_cols[7]), stof(my_cols[8]), tags);
+const string data_path = string("/home/cheyulin/GitRepos/OJCodes/qlcoder/database/query/solr_data.csv");
+const string query_path = string("/home/cheyulin/GitRepos/OJCodes/qlcoder/database/query/solr_query.txt");
+
+void PrintTupleListInfo(vector<TupleInfo> &tuple_list) {
+    for (auto idx = tuple_list.size() - 10; idx < tuple_list.size(); idx++) {
+        tuple_list[idx].Print();
+    }
+}
+
+void InitTupleList(vector<TupleInfo> &tuple_list, unordered_map<string, vector<long>> &tag_indices) {
+    ifstream input_stream(data_path);
+    string tmp_str;
+    getline(input_stream, tmp_str);
+    while (getline(input_stream, tmp_str)) {
+        tuple_list.emplace_back(tmp_str);
+        auto &cur_tuple = tuple_list.back();
+        for (auto &tag_str:cur_tuple.tag_list_) {
+            tag_indices[tag_str].push_back(cur_tuple.good_id_);
+        }
+    }
+
+    PrintTupleListInfo(tuple_list);
+}
+
+void InitQueryList(vector<QueryInfo> &query_list) {
+    ifstream input_stream(query_path);
+    string tmp_str;
+    while (getline(input_stream, tmp_str)) {
+        query_list.emplace_back(tmp_str);
+    }
 }
 
 int main() {
-    ifstream input_stream("/home/cheyulin/GitRepos/OJCodes/qlcoder/database/query/solr_data.csv");
-    string tmp_str;
-    getline(input_stream, tmp_str);
-    cout << "table schema" << tmp_str << endl;
-
-    getline(input_stream, tmp_str);
-    auto t = get_tuple_with_str(tmp_str);
-    vector<decltype(t)> tuple_list;
+    unordered_map<string, vector<long>> tag_indices;
+    vector<TupleInfo> tuple_list;
     tuple_list.reserve(3000000);
-    tuple_list.push_back(t);
+    vector<QueryInfo> query_list;
+    query_list.reserve(3000000);
 
-    while (getline(input_stream, tmp_str)) {
-        t = get_tuple_with_str(tmp_str);
-        tuple_list.push_back(t);
-    }
+    InitTupleList(tuple_list, tag_indices);
+    cout << "Finish Tuple Init" << endl;
+    InitQueryList(query_list);
+    cout << "Finish Query Init" << endl;
 
-    cout << "tuple size:" << tuple_list.size() << endl;
-    for (auto idx = tuple_list.size() - 10; idx < tuple_list.size(); idx++) {
-        cout << tuple_list[idx] << endl;
-    }
     return 0;
 }
