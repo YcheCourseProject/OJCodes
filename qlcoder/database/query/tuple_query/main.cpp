@@ -23,6 +23,9 @@ void InitTupleList(vector<TupleInfo> &tuple_list, unordered_map<string, vector<l
         tuple_list.emplace_back(tmp_str);
         auto &cur_tuple = tuple_list.back();
         for (auto &tag_str:cur_tuple.tag_list_) {
+            if (tag_indices[tag_str].size() > 0 && tag_indices[tag_str].back() == cur_tuple.good_id_) {
+                continue;
+            }
             tag_indices[tag_str].push_back(cur_tuple.good_id_);
         }
     }
@@ -95,8 +98,8 @@ int CheckMatchNumber(vector<TupleInfo> &tuple_list, unordered_map<string, vector
     vector<long> union_set;
     union_set.reserve(first_set.size() + second_set.size());
     auto filtered_count = 0;
+
     set_union(first_set.begin(), first_set.end(), second_set.begin(), second_set.end(), back_inserter(union_set));
-    cout << query_info.constraints_ << endl;
 
     for (auto ele: union_set) {
         if (CheckSingleTuple(tuple_list[ele], query_info.constraints_)) {
@@ -115,12 +118,15 @@ int main() {
 
     InitTupleList(tuple_list, tag_indices);
     cout << "Finish Tuple Init" << endl;
+
     InitQueryList(query_list);
     cout << "Finish Query Init" << endl;
     long long total = 0;
-    for (auto i = 0; i < 5; i++) {
+#pragma omp parallel for
+    for (auto i = 0; i < query_list.size(); i++) {
         auto tmp = CheckMatchNumber(tuple_list, tag_indices, query_list[i]);
-        cout << tmp << endl;
+//        cout << tmp << endl;
+#pragma omp critical
         total += tmp;
     }
     cout << "Total:" << total << endl;
