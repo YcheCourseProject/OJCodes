@@ -32,6 +32,12 @@ void StudyRegex() {
         cout << constraint << endl;
     }
     cout << endl;
+
+    string pattern= "聚酯";
+    std::regex txt_regex(".*" + pattern + ".*");
+    if(regex_match("聚酯纤维",txt_regex)){
+        cout <<"Okay"<<endl;
+    }
 }
 
 void StudyFloatComp() {

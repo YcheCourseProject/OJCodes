@@ -3,7 +3,8 @@
 
 import re
 
-if __name__ == '__main__':
+
+def check_error():
     with open('/home/cheyulin/GitRepos/OJCodes/qlcoder/database/query/tuple_query/build/tmp.txt') as ifs:
         lines = ifs.readlines()
         to_used = lines[15: 15 + 13262]
@@ -33,5 +34,22 @@ if __name__ == '__main__':
         print 'query string:', lines[14]
 
         for i in range(1, len(to_used)):
-            if my_list[i]==my_list[i-1]:
+            if my_list[i] == my_list[i - 1]:
                 print my_list[i], i
+
+
+if __name__ == '__main__':
+    tagStr = "印花 新款 秋冬 纯色 字母 套装 套头 宽松 连帽 拼接 显瘦 拉链 条纹 " \
+             "加厚 修身 收腰 情侣 大码 撞色 加绒 清新 休闲 文艺 甜美 运动 学院 韩系 " \
+             "街头 通勤 OL 欧美 卡通 森系 复古 轻熟 民族 田园 简约 可爱 个性 聚酯纤维 涂层布 " \
+             "涤纶 毛呢布 锦纶 其他 迷彩布 聚酯 羊皮立领 双层领 堆堆领 连帽 翻领 其他 可脱卸帽 " \
+             "V领 圆领 口袋 拼接 品牌LOGO 拉链 系带 绣花 带毛领 字母 绑带 纽扣"
+    tag = tagStr.split(" ")
+    tag_set = set()
+    for ele in tag:
+        tag_set.add(ele)
+    for ele in tag_set:
+        for ele2 in tag_set:
+            if ele != ele2 and ele in ele2:
+                print ele, ele2
+    print len(tag_set)

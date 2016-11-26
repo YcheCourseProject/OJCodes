@@ -8,6 +8,8 @@ using namespace std;
 
 const string data_path = string("/home/cheyulin/GitRepos/OJCodes/qlcoder/database/query/solr_data.csv");
 const string query_path = string("/home/cheyulin/GitRepos/OJCodes/qlcoder/database/query/solr_query.txt");
+const string special_tag = string("聚酯纤维");
+const string special_tag_sub_str = string("聚酯");
 
 void PrintTupleListInfo(vector<TupleInfo> &tuple_list) {
     for (auto idx = tuple_list.size() - 10; idx < tuple_list.size(); idx++) {
@@ -27,6 +29,13 @@ void InitTupleList(vector<TupleInfo> &tuple_list, unordered_map<string, vector<l
                 continue;
             }
             tag_indices[tag_str].push_back(cur_tuple.good_id_);
+            if (tag_str == special_tag) {
+                if (tag_indices[special_tag_sub_str].size() > 0 &&
+                    tag_indices[special_tag_sub_str].back() == cur_tuple.good_id_) {
+                    continue;
+                }
+                tag_indices[special_tag_sub_str].push_back(cur_tuple.good_id_);
+            }
         }
     }
 
