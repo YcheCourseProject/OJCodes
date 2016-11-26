@@ -28,6 +28,8 @@ void InitTupleList(vector<TupleInfo> &tuple_list, unordered_map<string, vector<l
     }
 
     PrintTupleListInfo(tuple_list);
+    cout << "tuple size:\t" << tuple_list.size() << endl;
+    cout << "tag size:\t" << tag_indices.size() << endl;
 }
 
 void InitQueryList(vector<QueryInfo> &query_list) {
@@ -38,13 +40,70 @@ void InitQueryList(vector<QueryInfo> &query_list) {
     }
 }
 
-bool CheckSingleTuple(TupleInfo &tuple, QueryInfo &query_info) {
-
+bool CheckSingleTuple(TupleInfo &tuple, vector<vector<string>> &constraints) {
+    for (auto &constraint:constraints) {
+        if (constraint[0] == COLOR) {
+            if (tuple.color_ != constraint[1])
+                return false;
+        } else if (constraint[0] == PRICE) {
+            int left = stoi(constraint[1]);
+            int right = stoi(constraint[2]);
+            if (tuple.price_ < left || tuple.price_ > right)
+                return false;
+        } else if (constraint[0] == SALE_NUM) {
+            int left = stoi(constraint[1]);
+            int right = stoi(constraint[2]);
+            if (tuple.sale_num_ < left || tuple.sale_num_ > right)
+                return false;
+        } else if (constraint[0] == FAV_NUM) {
+            int left = stoi(constraint[1]);
+            int right = stoi(constraint[2]);
+            if (tuple.fav_num_ < left || tuple.fav_num_ > right)
+                return false;
+        } else if (constraint[0] == SIZE) {
+            int left = stoi(constraint[1]);
+            int right = stoi(constraint[2]);
+            if (tuple.size_ < left || tuple.size_ > right)
+                return false;
+        } else if (constraint[0] == ITEM_NUM) {
+            int left = stoi(constraint[1]);
+            int right = stoi(constraint[2]);
+            if (tuple.item_num_ < left || tuple.item_num_ > right)
+                return false;
+        } else if (constraint[0] == CREATE_AT) {
+            long left = stol(constraint[1]);
+            long right = stol(constraint[2]);
+            if (tuple.create_at_ < left || tuple.create_at_ > right)
+                return false;
+        } else if (constraint[0] == DSR) {
+            float left = stof(constraint[1]);
+            float right = stof(constraint[2]);
+            if (tuple.dsr_ < left || tuple.dsr_ > right)
+                return false;
+        } else {
+            cerr << "something wrong" << endl;
+            cout << "something wrong" << endl;
+        }
+    }
+    return true;
 }
 
 int CheckMatchNumber(vector<TupleInfo> &tuple_list, unordered_map<string, vector<long>> &tag_indices,
                      QueryInfo &query_info) {
-    
+    auto &first_set = tag_indices[query_info.tags_[0]];
+    auto &second_set = tag_indices[query_info.tags_[1]];
+    vector<long> union_set;
+    union_set.reserve(first_set.size() + second_set.size());
+    auto filtered_count = 0;
+    set_union(first_set.begin(), first_set.end(), second_set.begin(), second_set.end(), back_inserter(union_set));
+    cout << query_info.constraints_ << endl;
+
+    for (auto ele: union_set) {
+        if (CheckSingleTuple(tuple_list[ele], query_info.constraints_)) {
+            filtered_count++;
+        }
+    }
+    return filtered_count;
 }
 
 int main() {
@@ -58,6 +117,12 @@ int main() {
     cout << "Finish Tuple Init" << endl;
     InitQueryList(query_list);
     cout << "Finish Query Init" << endl;
-
+    long long total = 0;
+    for (auto i = 0; i < 5; i++) {
+        auto tmp = CheckMatchNumber(tuple_list, tag_indices, query_list[i]);
+        cout << tmp << endl;
+        total += tmp;
+    }
+    cout << "Total:" << total << endl;
     return 0;
 }

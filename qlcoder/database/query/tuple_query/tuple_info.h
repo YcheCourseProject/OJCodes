@@ -13,7 +13,7 @@ struct TupleInfo {
     int sale_num_;
     int fav_num_;
     string color_;
-    string size_;
+    int size_;
     int item_num_;
     long create_at_;
     float dsr_;
@@ -27,7 +27,7 @@ struct TupleInfo {
         sale_num_ = stoi(my_cols[2]);
         fav_num_ = stoi(my_cols[3]);
         color_ = move(my_cols[4]);
-        size_ = move(my_cols[5]);
+        size_ = stoi(my_cols[5]);
         item_num_ = stoi(my_cols[6]);
         create_at_ = stol(my_cols[7]);
         dsr_ = stof(my_cols[8]);

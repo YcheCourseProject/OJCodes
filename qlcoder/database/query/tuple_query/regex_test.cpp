@@ -28,9 +28,10 @@ void StudyRegex() {
     string my_str = "(tag:*字母* OR tag:*甜美*) AND saleNum:[13202 TO 43161] AND color:red AND favNum:[67680 TO 97990]";
     QueryInfo query_info(my_str);
     cout << query_info.tags_ << endl;
-    cout << query_info.first_constraint_ << endl;
-    cout << query_info.second_constraint_ << endl;
-    cout << query_info.third_constraint_ << endl << endl;
+    for (auto &constraint: query_info.constraints_) {
+        cout << constraint << endl;
+    }
+    cout << endl;
 }
 
 void StudyFloatComp() {
