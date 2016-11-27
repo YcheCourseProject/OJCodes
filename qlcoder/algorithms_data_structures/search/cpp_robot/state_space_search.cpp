@@ -179,7 +179,7 @@ string RobotSolver::GetAnswerUrl() {
     bool is_break = false;
     string ret_str = "Not find";
 
-#pragma omp parallel for num_threads(16)
+#pragma omp parallel for
     for (auto tmp_row_idx = 0; tmp_row_idx < robot_map_.size(); tmp_row_idx++) {
         for (auto tmp_col_idx = 0; !is_break && tmp_col_idx < robot_map_[0].size(); tmp_col_idx++) {
             if (robot_map_[tmp_row_idx][tmp_col_idx] == EMPTY_CHAR) {
