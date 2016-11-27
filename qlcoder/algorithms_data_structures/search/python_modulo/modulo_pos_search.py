@@ -99,7 +99,7 @@ def execute_answer():
     print arg_params
 
     print piece_index_list
-    cmd_str='../cpp_modulo/build/cpp_modulo ' + arg_params + ' >output_res.txt'
+    cmd_str = '../cpp_modulo/build/cpp_modulo ' + arg_params + ' >output_res.txt'
     print cmd_str
     os.system(cmd_str)
     with open('output_res.txt') as ifs:
@@ -116,5 +116,9 @@ def execute_answer():
 
 if __name__ == '__main__':
     for i in range(1, 40):
-        execute_answer()
-    # execute_answer()
+        try:
+            execute_answer()
+        except IOError:
+            execute_answer()
+        else:
+            execute_answer()
