@@ -71,42 +71,44 @@ make
 ATTENTION:
 If libpng (the official PNG reference library) is not installed in your computer, 
 an option LOCAL_LIBS=1 should be added after make. Example
-make OMP=1 LOCAL_LIBS=1
-The compilation will automatically download and compile libpng and zlib and 
+`make OMP=1 LOCAL_LIBS=1`. The compilation will automatically download and compile libpng and zlib and 
 include the library to the program.
 
 3. Run ASIFT. 
-./demo_ASIFT imgIn1.png, imgIn2.png imgOutVert.png imgOutHori.png matchings.txt 
 
-keys1.txt keys2.txt
+```zsh
+./demo_ASIFT imgIn1.png, imgIn2.png imgOutVert.png imgOutHori.png matchings.txt keys1.txt keys2.txt
+```
 
--- imgIn1.png, imgIn2.png: Input images (in png format).
--- imgOutVert.png, imgOutHori.png: Output images (vertical/horizontal concatenated). 
-The detected matches are connected by write lines.
--- matchings.txt: The file format starts with 1 integer giving the total number 
-of matches. Then each line specifies the coordinates (col1, row1, col2, row2) 
-of a pair of matched points. (col: horizontal axis, from left to right. 
-
+- imgIn1.png, imgIn2.png: Input images (in png format).
+- imgOutVert.png, imgOutHori.png: Output images (vertical/horizontal concatenated). The detected matches are connected by write lines.
+- matchings.txt: The file format starts with 1 integer giving the total number of matches. 
+Then each line specifies the coordinates (col1, row1, col2, row2) of a pair of matched points. (col: horizontal axis, from left to right. 
 row: vertical axis, from top to bottom.)
--- keys1.txt keys2.txt: ASIFT keypoints in the two images, in the same format 
+
+- keys1.txt keys2.txt: ASIFT keypoints in the two images, in the same format 
 as the SIFT keypoints of David Lowe. The file starts with 2 integers giving 
 the total number of keypoints and the length of the descriptor vector for each 
 keypoint (128). Then the location of each keypoint in the image is specified 
 by 4 floating point numbers giving subpixel column and row location, scale, 
 and orientation (in radians from -PI to PI). Finally, the invariant descriptor
  vector for the keypoint is given as a list of 128 integers in range [0,255]. 
--- [optional 0/1]. 1: input images resize to an area equal to 800x600 for ASIFT,
+
+- [optional 0/1]. 1: input images resize to an area equal to 800x600 for ASIFT,
  in keeping the aspect ratio (by default). 0: no resize. The resize is to limit
  the ASIFT computation time. The results (output images, keypoint coordinates
  and scales) are normalized to the original image size, so the resize is 
 "transparent" to the user. 
 
 Example, run
-./demo_ASIFT adam1.png adam2.png imgOutVert.png imgOutHori.png matchings.txt 
 
-keys1.txt keys2.txt 
+```zsh
+./demo_ASIFT adam1.png adam2.png imgOutVert.png imgOutHori.png matchings.txt keys1.txt keys2.txt 
+```
 
 You get on the screen 
+
+```zsh
 "WARNING: The input images are resized to 800x600 for ASIFT. 
          But the results will be normalized to the original image size.
 
@@ -117,6 +119,7 @@ Keypoints computation accomplished in 24 seconds.
 Matching the keypoints...
 The two images match! 914 matchings are identified. log(nfa)=-1496.88.
 Keypoints matching accomplished in 4 seconds."
+```
 
 ###WINDOWS USER GUIDE
 
