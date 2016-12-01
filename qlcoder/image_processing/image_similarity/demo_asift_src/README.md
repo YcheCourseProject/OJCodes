@@ -36,9 +36,8 @@ If you use the ASIFT code or software, please cite the following paper:
 J.M. Morel and G.Yu, ASIFT: A New Framework for Fully Affine Invariant Image 
 Comparison, SIAM Journal on Imaging Sciences, vol. 2, issue 2, pp. 438-469, 2009. 
 
-##Build Tutorial
-
-###UNIX/LINUX/MAC USER GUIDE
+##UNIX/LINUX/MAC USER GUIDE
+###Introduction
 
 The source code needs to be compiled before the software can be used. 
 The compilation requires the make program, and is typically straightforward.
@@ -51,27 +50,25 @@ LOCAL_LIBS=1 option to the make commands.
 - Image format. 
 Only the PNG format is supported. 
  
--------------------------------------------------------------------------
 
-Source compilation and software usage
+###Build & Usage
 
 1. Download the ASIFT code package and extract it. Go to that directory. 
 
 2. Compile the source code (on Unix/Linux/Mac OS). 
-There are two ways to compile the code. 
-(1) RECOMMENDED, with Open Multi-Processing multithread parallelization 
-(http://openmp.org/). Roughly speaking, it accelerates the program using the 
-multiple processors in the computer. Run
-make OMP=1
 
-OR
-(2) If the complier does not support OpenMp, run 
-make
+There are two ways to compile the code. 
+
+  - RECOMMENDED, with Open Multi-Processing multithread parallelization 
+(http://openmp.org/). Roughly speaking, it accelerates the program using the 
+multiple processors in the computer. Run `make OMP=1`
+ 
+  - If the complier does not support OpenMp, run `make`
 
 ATTENTION:
-If libpng (the official PNG reference library) is not installed in your computer, 
-an option LOCAL_LIBS=1 should be added after make. Example
-`make OMP=1 LOCAL_LIBS=1`. The compilation will automatically download and compile libpng and zlib and 
+
+If libpng (the official PNG reference library) is not installed in your computer, an option `LOCAL_LIBS=1` should be added after make. 
+Example `make OMP=1 LOCAL_LIBS=1`. The compilation will automatically download and compile libpng and zlib and 
 include the library to the program.
 
 3. Run ASIFT. 
@@ -121,7 +118,7 @@ The two images match! 914 matchings are identified. log(nfa)=-1496.88.
 Keypoints matching accomplished in 4 seconds."
 ```
 
-###WINDOWS USER GUIDE
+##WINDOWS USER GUIDE
 
 _________________________________________________________________________
 A. EXECUTABLE
@@ -239,7 +236,7 @@ demo_ASIFT adam1.png adam2.png imgOutVert.png imgOutHori.png matchings.txt
  keys1.txt keys2.txt
 (It follows the same syntax of that for Unix/Linux/Mac described above.)
 
-###MATLAB INTERFACE (OPTIONAL)
+##MATLAB INTERFACE (OPTIONAL)
 
 Run ASIFT via Matlab: Open test_demo_ASIFT.m in Matlab and execute the script.
 The Matlab interface reads most standard image formats.
