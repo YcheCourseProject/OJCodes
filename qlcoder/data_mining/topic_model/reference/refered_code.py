@@ -1,9 +1,7 @@
 #!/usr/bin/python
 # -*- coding:utf8 -*-
 
-import os
 import time
-import re
 import jieba.analyse
 
 
@@ -45,21 +43,21 @@ def post_cluster(url, id, tfidf_vec):
     kmean = KMeans(n_clusters=300)
     print "kmeans"
     kmean.fit(tfidf_vec)
-    #     pred = kmean.transform(tfidf_vec)
+    pred = kmean.transform(tfidf_vec)
 
-    #   count1 = 0
-    #   count2 = 0
-    #     pred_str = []
-    #
-    #     for item in pred:
-    #         count1 += 1
-    #         vec = ""
-    #         for tmp in item :
-    #             vec += str(tmp)[0:7] + "\t"
-    #         pred_str.append(vec)
-    #
-    #     print len(pred_str)
-    #     print len(id)
+    count1 = 0
+    count2 = 0
+    pred_str = []
+
+    for item in pred:
+        count1 += 1
+        vec = ""
+        for tmp in item:
+            vec += str(tmp)[0:7] + "\t"
+        pred_str.append(vec)
+
+    print len(pred_str)
+    print len(id)
 
     pred = kmean.predict(tfidf_vec)
     fo = open(url + "/cluster.txt", "a+")
@@ -85,15 +83,13 @@ def post_lda(url, cluster):
             id_list.append(term[0])
             word = term[1].strip().split()
             data_list.append(word)
-    print "lda"
-    dic = corpora.Dictionary(data_list)  # 构造词典
-    corpus = [dic.doc2bow(text) for text in data_list]  # 每个text 对应的稀疏向量
-    tfidf = models.TfidfModel(corpus)  # 统计tfidf
-    print "lda"
-    corpus_tfidf = tfidf[corpus]  # 得到每个文本的tfidf向量，稀疏矩阵
+
+    dic = corpora.Dictionary(data_list)
+    corpus = [dic.doc2bow(text) for text in data_list]  #
+    tfidf = models.TfidfModel(corpus)
+    corpus_tfidf = tfidf[corpus]
     lda = models.LdaModel(corpus_tfidf, id2word=dic, num_topics=200)
-    corpus_lda = lda[corpus_tfidf]  # 每个文本对应的LDA向量，稀疏的，元素值是隶属与对应序数类的权重
-    print "lda"
+    corpus_lda = lda[corpus_tfidf]
 
     num = 0
     for doc in corpus_lda:
