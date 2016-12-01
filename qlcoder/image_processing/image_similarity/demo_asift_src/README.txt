@@ -1,47 +1,44 @@
-Demo code for Affine-SIFT (ASIFT) image matching
--------------------------------------------------------------------------
--------------------------------------------------------------------------
+#Affine-SIFT (ASIFT) image matching
+
+##Introuduction
+
+- Author
+
 Jean-Michel Morel (Jean-Michel Morel <morel@cmla.ens-cachan.fr>)
 Guoshen Yu (yu@cmap.polytechnique.fr)
+
+- Software
 
 Version 2.2, April. 10, 2010
 
 This directory contains the C++ code for ASIFT, a fully affine invariant image 
 matching algorithm. 
 
-************************** Unix/Linux/Mac Users **************************
-For Unix/Linux and Mac users, the code is ready to be compiled. The 
-executable adapted to your computer system is generated after compiling.
-**************************************************************************
+Source code compilation and software usage across platforms is detailed in this manual.
+If you have any problem using the this program, please contact Guoshen Yu(yu@cmap.polytechnique.fr).
 
-***************************** Windows Users ******************************
-For Windows users, the executable as well as the code is provided. 
-(For the executable, you need to download separately the installation file from 
+- More Information
+
+For more information about ASIFT, please see the [web page](http://www.ipol.im/pub/algo/my_affine_sift/).
+You can also try ASIFT using the online demo. The online demo allows testing ASIFT with your own images without installing the program.
+
+##Platform Support
+
+- For Unix/Linux and Mac users, the code is ready to be compiled. The executable adapted to your computer system is generated after compiling.
+
+- For Windows users, the executable as well as the code is provided. (For the executable, you need to download separately the installation file from
 http://www.ipol.im/pub/algo/my_affine_sift/ .)
-**************************************************************************
 
-**************************** Matlab Interface ****************************
-Although the ASIFT program is standalone and can be executed without Matlab,
-a Matlab interface is provided (for Unix/Linux/Mac/Windows users). 
-**************************************************************************
+- Although the ASIFT program is standalone and can be executed without Matlab, a Matlab interface is provided (for Unix/Linux/Mac/Windows users).
 
-Source code compilation and software usage across platforms is detailed in this
-manual. If you have any problem using the this program, please contact Guoshen Yu 
-yu@cmap.polytechnique.fr
-				   
-For more information about ASIFT, please see the web page at 
-http://www.ipol.im/pub/algo/my_affine_sift/.
-You can also try ASIFT using the online demo. The online demo allows testing
-ASIFT with your own images without installing the program. 
-
+##Citation
 If you use the ASIFT code or software, please cite the following paper: 
 J.M. Morel and G.Yu, ASIFT: A New Framework for Fully Affine Invariant Image 
 Comparison, SIAM Journal on Imaging Sciences, vol. 2, issue 2, pp. 438-469, 2009. 
 
--------------------------------------------------------------------------
--------------------------------------------------------------------------
+##Build Tutorial
 
-I. UNIX/LINUX/MAC USER GUIDE
+###UNIX/LINUX/MAC USER GUIDE
 
 The source code needs to be compiled before the software can be used. 
 The compilation requires the make program, and is typically straightforward.
@@ -119,9 +116,7 @@ Matching the keypoints...
 The two images match! 914 matchings are identified. log(nfa)=-1496.88.
 Keypoints matching accomplished in 4 seconds."
 
--------------------------------------------------------------------------
--------------------------------------------------------------------------
-II. WINDOWS USER GUIDE
+###WINDOWS USER GUIDE
 
 _________________________________________________________________________
 A. EXECUTABLE
@@ -237,10 +232,9 @@ demo_ASIFT adam1.png adam2.png imgOutVert.png imgOutHori.png matchings.txt
  keys1.txt keys2.txt
 (It follows the same syntax of that for Unix/Linux/Mac described above.)
 
--------------------------------------------------------------------------
--------------------------------------------------------------------------
-III. MATLAB INTERFACE (OPTIONAL)
-Run ASIFT via Matlab: Open test_demo_ASIFT.m in Matlab and execute the script. 
+###MATLAB INTERFACE (OPTIONAL)
+
+Run ASIFT via Matlab: Open test_demo_ASIFT.m in Matlab and execute the script.
 The Matlab interface reads most standard image formats.
 
 -------------------------------------------------------------------------
@@ -261,7 +255,7 @@ CMake.
 
 -------------------------------------------------------------------------
 -------------------------------------------------------------------------
-Licensing conditions
 
-This software is being made available for research purposes only. See the
- file LICENSE in this directory for conditions of use.
+##Licensing conditions
+
+This software is being made available for research purposes only. See the file [LICENSE](LICENSE.txt) in this directory for conditions of use.
