@@ -52,7 +52,9 @@ LOCAL_LIBS=1 option to the make commands.
 Only the PNG format is supported. 
  
 -------------------------------------------------------------------------
+
 Source compilation and software usage
+
 1. Download the ASIFT code package and extract it. Go to that directory. 
 
 2. Compile the source code (on Unix/Linux/Mac OS). 
@@ -121,6 +123,7 @@ Keypoints matching accomplished in 4 seconds."
 _________________________________________________________________________
 A. EXECUTABLE
 _________________________________________________________________________
+
 For Windows users who do not want to recompile the source code, an ASIFT executable 
 installation file can be download separately from 
 http://www.ipol.im/pub/algo/my_affine_sift/.
@@ -156,6 +159,7 @@ You can of course move the ASIFT directory C:\Program Files\demo_ASIFT to
 wherever that is more convenient. 
 
 -------------------------------------------------------------------------
+
 Troubleshooting 
 1. If you are able to run the program but the results are not written to 
 the output files, check and make sure that you have the write file permission 
@@ -239,7 +243,9 @@ The Matlab interface reads most standard image formats.
 
 -------------------------------------------------------------------------
 -------------------------------------------------------------------------
+
 CREDITS
+
 - The epipolar geometry filtering algorithm ORSA of Moisan and Stival is 
 used at the end of the ASIFT algorithm 
 to eliminate false matches. 
