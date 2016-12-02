@@ -1,14 +1,10 @@
 # ~/anaconda2/bin/python
 # coding:utf-8
 
-import sys
 from gensim import corpora, models, matutils
 from sklearn.cluster import KMeans
 
 import data_preprocessing_util
-
-reload(sys)
-sys.setdefaultencoding("utf8")
 
 if __name__ == '__main__':
     lst = []

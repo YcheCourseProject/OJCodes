@@ -1,10 +1,5 @@
 # ~/anaconda2/bin/python
 # coding:utf-8
-import random
-import sys
-
-reload(sys)
-sys.setdefaultencoding("utf8")
 
 tag_word_dict = dict()
 with open('frequency_top_1000.txt') as ifs:

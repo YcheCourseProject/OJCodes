@@ -1,11 +1,7 @@
 # ~/anaconda2/bin/python
 # coding:utf-8
 
-import sys
 import operator
-
-reload(sys)
-sys.setdefaultencoding("utf8")
 
 with open('output_readable.txt') as ifs:
     lines = ifs.readlines()

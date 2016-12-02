@@ -25,19 +25,10 @@ def get_lines_single_file(file_name):
 
 
 def get_sorted_lines():
-    count = 0
-    min_val = 99999
-    max_val = -1
     for i in range(8000):
         lines = get_lines_single_file('../8000/' + str(i) + '.txt')
-        if len(lines) < 2:
-            min_val = min_val if len(lines[0]) > min_val else len(lines[0])
-            max_val = max_val if len(lines[0]) < max_val else len(lines[0])
-            if len(lines[0]) > 200:
-                print i, lines[0]
-            count += 1
-    print count
-    print min_val, max_val
+        with open('../8000_copy/' + str(i) + '.txt', 'w') as ofs:
+            ofs.write('\n'.join(lines))
 
 
 get_sorted_lines()

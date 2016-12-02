@@ -1,13 +1,9 @@
 # ~/anaconda2/bin/python
 # coding:utf-8
 
-import sys
 import os
 import re
 import jieba.analyse
-
-reload(sys)
-sys.setdefaultencoding("utf8")
 
 stop_words_set = {}
 stop_file_name = 'cn_stop_words.txt'

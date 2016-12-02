@@ -1,10 +1,6 @@
 # ~/anaconda2/bin/python
 # coding:utf-8
 
-import sys
-
-reload(sys)
-sys.setdefaultencoding("utf8")
 
 with open('tmp.txt') as line_ifs:
     ref_words = line_ifs.readlines()

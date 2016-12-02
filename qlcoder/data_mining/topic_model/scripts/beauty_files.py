@@ -1,11 +1,7 @@
 # ~/anaconda2/bin/python
 # coding:utf-8
 
-import sys
 import re
-
-reload(sys)
-sys.setdefaultencoding("utf8")
 
 bad_case_set = set()
 irrelevant_set = set()
@@ -17,24 +13,32 @@ def is_bad_pattern(line_str):
     line_str = line_str.rstrip().lstrip()
     if len(line_str) == 0:
         return True
-        # else:
-        # if re.match('badcase.*', line_str):
-        #     bad_case_set.add(line_str.split()[1])
-        # return True
-
-        # return False
 
 
-def extract_link(line):
-    if re.match(r'.*\[.*\]', line):
-        print 'match'
-        links = re.findall(r'\[.*\]', line)
-        return links
-    else:
-        return None
+def get_lines_single_file(file_name):
+    with open(file_name) as ifs:
+        lines = ifs.readlines()
+        new_lines = []
+        for line in lines:
+            new_lines.extend(re.sub(r'\xe3\x80\x80|&nbsp;|&nbsp|&gt;|&gt|\x00', '\n', line).split())
+
+        new_lines = map(lambda ele: ele.rstrip().lstrip(), new_lines)
+        new_lines = filter(lambda ele: not is_bad_pattern(ele), new_lines)
+        new_lines = map(lambda ele: ele.lstrip().rstrip(), new_lines)
+        return new_lines
 
 
-with open('../8000/5.txt') as ifs:
+def extract_link(lines):
+    links = []
+    for line in lines:
+        if re.match(r'.*\[.*\]', line):
+            links.extend(re.findall(r'\[.*\]', line))
+        if re.match(r'\xe3\x80\x90.*\xe3\x80\x91', line):
+            links.extend(re.findall(r'\xe3\x80\x90.*\xe3\x80\x91', line))
+    return links
+
+
+with open('../8000/0.txt') as ifs:
     lines = ifs.readlines()
     new_lines = []
     for line in lines:
@@ -46,10 +50,7 @@ with open('../8000/5.txt') as ifs:
 
     for line in new_lines:
         print 'line:', line
-        links = extract_link(line)
-        if not links is None:
-            print links
-    print new_lines
 
-for ele in bad_case_set:
-    print bad_case_set
+    links = extract_link(new_lines)
+    if len(links) > 0:
+        print ''.join(links)
