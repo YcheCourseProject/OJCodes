@@ -1,6 +1,6 @@
 # ~/anaconda2/bin/python
 # coding:utf-8
-
+import random
 import sys
 
 reload(sys)
