@@ -33,6 +33,7 @@ def extract_link(line):
     else:
         return None
 
+
 with open('../8000/5.txt') as ifs:
     lines = ifs.readlines()
     new_lines = []
@@ -46,7 +47,7 @@ with open('../8000/5.txt') as ifs:
     for line in new_lines:
         print 'line:', line
         links = extract_link(line)
-        if not links  is None:
+        if not links is None:
             print links
     print new_lines
 
