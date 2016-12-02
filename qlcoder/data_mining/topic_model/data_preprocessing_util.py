@@ -86,8 +86,8 @@ def find_bad_things():
     with open('output_readable.txt', 'w') as readable_ofs:
         with open(bad_info_file_name, 'w') as ofs:
             for i in range(8000):
-                if len(my_dict[str(i)]) < 10:
-                    tmp_str = 'question:' + str(i) + ' data:' + ','.join(my_dict[str(i)]) + 'data length:' + str(
+                if len(my_dict[str(i)]) < 5:
+                    tmp_str = 'question:' + str(i) + ' data:' + ','.join(my_dict[str(i)]) + ' data length:' + str(
                         len(my_dict[str(i)])) + '\n'
                     bad_list.append(str(i))
                     ofs.write(tmp_str)
