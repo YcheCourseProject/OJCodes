@@ -6,14 +6,14 @@
 #     ref_words = line_ifs.readlines()
 
 my_dict = {
-    0: '教育',
-    1: '体育',
-    2: '健康',
-    3: '财经',
-    4: 'IT',
-    5: '文化',
-    6: '军事',
-    7: '旅游'
+    0: '旅游',
+    1: 'IT',
+    2: '财经',
+    3: '健康',
+    4: '体育',
+    5: '军事',
+    6: '文化',
+    7: '教育'
 }
 
 qlcoder_dict = {
@@ -34,8 +34,8 @@ with open('output_tmp_res.txt') as my_ifs:
     label = []
     for i in range(8000):
         label.append(qlcoder_dict[my_dict[mark_lst[i]]])
-        # if mark_lst[i] == 7:
-        #     with open('../8000_words/' + str(i) + '.txt') as ifs:
-        #         print str(i) + ','.join(map(lambda line: line.strip(), ifs.readlines()))
-    label=map(str, label)
+        if mark_lst[i] == 3:
+            with open('../8000_words/' + str(i) + '.txt') as ifs:
+                print str(i) + ','.join(map(lambda line: line.strip(), ifs.readlines()))
+    label = map(str, label)
     print ''.join(label)
