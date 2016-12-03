@@ -3,15 +3,20 @@
 
 import re
 
+stop_words_set = set()
 all_eng_count = 0
+stop_file_name = '../cn_stop_words.txt'
 
 noise_words_first = ['可能与主题无关的词', 'badcase', '噪音词', ]
 noise_words_second = ['IT', '健康', '体育', '旅游', '教育', '文化', '军事', '财经']
-noise_words = []
-for first in noise_words_first:
-    for second in noise_words_second:
-        noise_words.append(first + second)
-stop_words = [r'\xe3\x80\x80', r'&nbsp;', r'&nbsp', r'&gt;', r'&gt', r'\x00', r'\s']
+map_res = map(lambda first: [first + second for second in noise_words_second], noise_words_first)
+noise_words = reduce(lambda left, right: left + right, map_res)
+blank_symbols = [r'\xe3\x80\x80', r'&nbsp;', r'&nbsp', r'&gt;', r'&gt', r'\x00', r'\s']
+
+title_suffix = ['、', '\.', '．', '）']
+titles = map(lambda ele: r'[0-9]+' + ele, title_suffix)
+title_symbols = [r'（[0-9]+）', r'\([0-9]+\)', r'{[0-9]}', r'\[[0-9]+\]']
+title_symbols.extend(titles)
 
 
 def remove_regex(regex_str_list, lines):
@@ -21,22 +26,28 @@ def remove_regex(regex_str_list, lines):
     return ret_lines
 
 
+def extract_eng_words(lines):
+    eng_words = []
+    for line in lines:
+        if re.match('.*[a-zA-Z]+.*', line):
+            for ele in re.findall('[a-zA-Z]+', line):
+                eng_words.append(ele)
+    return eng_words
+
+
 def get_lines_single_file(file_name):
     with open(file_name) as ifs:
         lines = ifs.readlines()
-        lines = remove_regex(stop_words, lines)
+        lines = remove_regex(blank_symbols, lines)
         lines = remove_regex(noise_words, lines)
+        lines = remove_regex(title_symbols, lines)
 
-        eng_words = []
-        for line in lines:
-            if re.match('.*[a-zA-Z]+.*', line):
-                for ele in re.findall('[a-zA-Z]+', line):
-                    eng_words.append(ele)
-
+        eng_words = extract_eng_words(lines)
         all_words_count = len(''.join(lines))
         eng_words_count = len(''.join(eng_words))
         global all_eng_count
         if float(eng_words_count) / all_words_count > 0.3:
+            print 'cat' + ' ' + file_name
             all_eng_count += 1
         return lines
 
@@ -51,6 +62,14 @@ def remove_duplicate(lines):
     return ret_lines
 
 
+def init_stop_words_set(file_name):
+    global stop_words_set
+    with open(file_name, 'r') as ifs:
+        lines = ifs.readlines()
+        stop_words_set = set(map(lambda line: line.strip(), lines))
+    stop_words_set = map(lambda word: unicode(word, 'utf-8'), stop_words_set)
+
+
 def get_sorted_lines():
     for i in range(8000):
         lines = remove_duplicate(get_lines_single_file('../8000/' + str(i) + '.txt'))
@@ -58,5 +77,6 @@ def get_sorted_lines():
             ofs.write('\n'.join(lines))
 
 
-get_sorted_lines()
-print all_eng_count
+init_stop_words_set(stop_file_name)
+# get_sorted_lines()
+# print all_eng_count
