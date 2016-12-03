@@ -5,48 +5,48 @@ import re
 
 all_eng_count = 0
 
+noise_words_first = ['可能与主题无关的词', 'badcase', '噪音词', ]
+noise_words_second = ['IT', '健康', '体育', '旅游', '教育', '文化', '军事', '财经']
+noise_words = []
+for first in noise_words_first:
+    for second in noise_words_second:
+        noise_words.append(first + second)
+stop_words = [r'\xe3\x80\x80', r'&nbsp;', r'&nbsp', r'&gt;', r'&gt', r'\x00', r'\s']
+
+
+def remove_regex(regex_str_list, lines):
+    ret_lines = []
+    for line in lines:
+        ret_lines.extend(re.sub('|'.join(regex_str_list), '', line).split())
+    return ret_lines
+
 
 def get_lines_single_file(file_name):
     with open(file_name) as ifs:
         lines = ifs.readlines()
-        new_lines = []
+        lines = remove_regex(stop_words, lines)
+        lines = remove_regex(noise_words, lines)
+
+        eng_words = []
         for line in lines:
-            new_lines.extend(re.sub(r'\xe3\x80\x80|&nbsp;|&nbsp|&gt;|&gt|\x00|\s', '', line).split())
-
-        ret_lines = []
-        eng_words_set = set()
-
-        is_bad = False
-
-        for i in range(len(new_lines)):
-            line = new_lines[i]
-            if is_bad:
-                is_bad = False
-                continue
-            elif re.match('.*可能与主题无关的词.*', line) or re.match('.*badcase.*', line) or re.match('.*噪音词.*', line):
-                is_bad = True
-                continue
-            ret_lines.append(line)
-
-        pattern_eng = re.compile('.*[a-zA-Z]+.*')
-        for line in ret_lines:
-            if re.match(pattern_eng, line):
+            if re.match('.*[a-zA-Z]+.*', line):
                 for ele in re.findall('[a-zA-Z]+', line):
-                    eng_words_set.add(ele)
+                    eng_words.append(ele)
 
+        all_words_count = len(''.join(lines))
+        eng_words_count = len(''.join(eng_words))
         global all_eng_count
-        if len(eng_words_set) > 5:
+        if float(eng_words_count) / all_words_count > 0.3:
             all_eng_count += 1
-            print eng_words_set
-        return ret_lines
+        return lines
 
 
 def remove_duplicate(lines):
     my_set = set()
     ret_lines = []
     for line in lines:
-        my_set.add(line)
-        if line not in ret_lines:
+        if line not in my_set:
+            my_set.add(line)
             ret_lines.append(line)
     return ret_lines
 
