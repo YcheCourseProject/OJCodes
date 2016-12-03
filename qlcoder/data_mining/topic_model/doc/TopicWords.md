@@ -44,7 +44,7 @@
 
 ##财经
 
-- [财经-财政，金融，经济](http://baike.baidu.com/subview/65159/5084884.htm)
+- [百度百科 - 财经-财政，金融，经济](http://baike.baidu.com/subview/65159/5084884.htm)
 
 > 财经是指财政、金融、经济。财经类专业是指经济类和管理类专业，常见的专业包括市场营销、会计、人力资源管理、金融、国际贸易、企业管理、统计、财税等，
 是近几年来人才市场上的热门专业。书名《财经》是一本密切关注中国经济制度变革与现代市场经济进程的新闻性刊物。
@@ -56,7 +56,7 @@
 
 ##IT
 
-- [IT产业](http://baike.baidu.com/view/399067.htm?fromtitle=IT%E4%BA%A7%E4%B8%9A&fromid=4415059&type=syn)
+- [百度百科 - IT产业](http://baike.baidu.com/view/399067.htm?fromtitle=IT%E4%BA%A7%E4%B8%9A&fromid=4415059&type=syn)
 
 - 简介
 
