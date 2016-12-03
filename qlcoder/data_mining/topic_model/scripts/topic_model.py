@@ -7,10 +7,14 @@ from sklearn.cluster import KMeans
 import data_preprocessing_util
 
 if __name__ == '__main__':
-    lst = []
-    print len(lst)
+    word_list = []
+    for i in range(8000):
+        with open('../8000_words/' + str(i) + '.txt') as ifs:
+            lines = ifs.readlines()
+            lines = set(map(lambda line: line.strip(), lines))
+            word_list.append(lines)
     # 列表，其中每个元素也是一个列表，即每行文字分词后形成的词语列表
-    word_list = data_preprocessing_util.return_all_key_words()
+    # word_list = data_preprocessing_util.return_all_key_words()
     print len(word_list)
 
     # 生成文档的词典，每个词与一个整型索引值对应
@@ -25,7 +29,7 @@ if __name__ == '__main__':
     print len(corpus_tfidf)
 
     # LDA, 降低维度
-    lda = models.ldamodel.LdaModel(corpus=corpus_list, id2word=word_dict, num_topics=2000, alpha='auto')
+    lda = models.ldamodel.LdaModel(corpus=corpus_list, id2word=word_dict, num_topics=8, alpha='auto')
     corpus_lda = lda[corpus_tfidf]
 
     kmean = KMeans(n_clusters=8)

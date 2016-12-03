@@ -18,9 +18,11 @@ def extract_link(lines):
     return links
 
 
-lines = yche_util.remove_duplicate(yche_util.get_lines_single_file('../8000/74.txt'))
+lines = yche_util.remove_duplicate(yche_util.get_lines_single_file('../8000/333.txt'))
 map_res = map(lambda line: jieba.posseg.cut(line), lines)
 words = reduce(lambda left, right: list(left) + list(right), map_res)
+word_vec = []
 for word, tag in words:
     if word not in yche_util.stop_words_set and re.match(r'n|a.*|v.*', tag) and not re.match(r'nr|ns|nz', tag):
+        word_vec.append(word)
         print word, tag

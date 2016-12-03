@@ -2,9 +2,9 @@
 # coding:utf-8
 
 import re
+import jieba.analyse
 
 stop_words_set = set()
-all_eng_count = 0
 stop_file_name = '../cn_stop_words.txt'
 
 noise_words_first = ['可能与主题无关的词', 'badcase', '噪音词', ]
@@ -13,10 +13,15 @@ map_res = map(lambda first: [first + second for second in noise_words_second], n
 noise_words = reduce(lambda left, right: left + right, map_res)
 blank_symbols = [r'\xe3\x80\x80', r'&nbsp;', r'&nbsp', r'&gt;', r'&gt', r'\x00', r'\s']
 
-title_suffix = ['、', '\.', '．', '）']
-titles = map(lambda ele: r'[0-9]+' + ele, title_suffix)
-title_symbols = [r'（[0-9]+）', r'\([0-9]+\)', r'{[0-9]}', r'\[[0-9]+\]']
-title_symbols.extend(titles)
+all_eng_count = 0
+
+
+def init_stop_words_set(file_name):
+    global stop_words_set
+    with open(file_name, 'r') as ifs:
+        lines = ifs.readlines()
+        stop_words_set = set(map(lambda line: line.strip(), lines))
+    stop_words_set = map(lambda word: unicode(word, 'utf-8'), stop_words_set)
 
 
 def remove_regex(regex_str_list, lines):
@@ -40,7 +45,6 @@ def get_lines_single_file(file_name):
         lines = ifs.readlines()
         lines = remove_regex(blank_symbols, lines)
         lines = remove_regex(noise_words, lines)
-        lines = remove_regex(title_symbols, lines)
 
         eng_words = extract_eng_words(lines)
         all_words_count = len(''.join(lines))
@@ -62,12 +66,16 @@ def remove_duplicate(lines):
     return ret_lines
 
 
-def init_stop_words_set(file_name):
-    global stop_words_set
-    with open(file_name, 'r') as ifs:
-        lines = ifs.readlines()
-        stop_words_set = set(map(lambda line: line.strip(), lines))
-    stop_words_set = map(lambda word: unicode(word, 'utf-8'), stop_words_set)
+def get_words_single_file(filename):
+    lines = remove_duplicate(get_lines_single_file(filename))
+    map_result = map(lambda line: jieba.posseg.cut(line), lines)
+    words = reduce(lambda left, right: list(left) + list(right), map_result)
+    word_vec = []
+    for word, tag in words:
+        if word not in stop_words_set and re.match(r'n|a.*|v.*', tag) and not re.match(r'nr|ns|nz', tag):
+            word_vec.append(word)
+            # print word, tag
+    return word_vec
 
 
 def get_sorted_lines():
@@ -77,6 +85,16 @@ def get_sorted_lines():
             ofs.write('\n'.join(lines))
 
 
+def get_words():
+    for i in range(8000):
+        words = get_words_single_file('../8000/' + str(i) + '.txt')
+        write_words = '\n'.join(words)
+        write_words = write_words.encode('utf-8')
+        with open('../8000_words/' + str(i) + '.txt', 'w') as ofs:
+            ofs.write(write_words)
+
+
 init_stop_words_set(stop_file_name)
+get_words()
 # get_sorted_lines()
 # print all_eng_count
