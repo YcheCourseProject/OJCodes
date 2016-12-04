@@ -99,6 +99,15 @@ class App0:
         self.question_number = tk.Text(frame, height=5, width=5)
         self.question_number.pack()
 
+        self.jump_btn = tk.Button(frame, text='跳转到题号', command=self.jump_to_question)
+        self.jump_btn.pack()
+
+        self.update_content()
+
+    def jump_to_question(self):
+        jump_to_id = int(self.question_number.get(1.0, tk.END))
+        print 'jump to question:', jump_to_id
+        self.question_idx = jump_to_id
         self.update_content()
 
     def save(self):
@@ -106,6 +115,8 @@ class App0:
             save_list = map(str, self.choice_list)
             ofs.write('[' + ','.join(save_list) + ']')
             print 'finish saving'
+        with open('question_number.txt', 'w') as ofs:
+            ofs.write(str(self.question_idx))
 
     def select_callback(self, ele):
         def test():
