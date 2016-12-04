@@ -7,7 +7,7 @@ from sklearn.cluster import KMeans
 if __name__ == '__main__':
     word_list = []
     for i in range(8000):
-        with open('../8000_words/' + str(i) + '.txt') as ifs:
+        with open('../../8000_words/' + str(i) + '.txt') as ifs:
             lines = ifs.readlines()
             lines = map(lambda line: line.strip(), lines)
             word_list.append(lines)
@@ -28,7 +28,7 @@ if __name__ == '__main__':
     print len(corpus_tfidf)
 
     # LDA, 降低维度
-    lda = models.ldamodel.LdaModel(corpus=corpus_tfidf, id2word=word_dict, num_topics=50, alpha='auto')
+    lda = models.ldamodel.LdaModel(corpus=corpus_tfidf, id2word=word_dict, num_topics=8, alpha='auto')
     corpus_lda = lda[corpus_tfidf]
     print 'finish lda'
 

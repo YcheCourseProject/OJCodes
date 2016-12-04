@@ -3,7 +3,7 @@
 
 import re
 
-import all_words_extract as yche_util
+import jieba_wrapper as yche_util
 import jieba.analyse
 import jieba.posseg
 

@@ -16,7 +16,7 @@ with open('frequency_top_1000.txt') as ifs:
     print len(tag_word_dict)
     for tag in tag_word_dict:
         print tag, len(tag_word_dict[tag])
-        # print tag_word_dict[tag]
+        # print tag_word_dict[tag_weight]
 
 
 def get_tag_dict(word_list, tag_word_dict):

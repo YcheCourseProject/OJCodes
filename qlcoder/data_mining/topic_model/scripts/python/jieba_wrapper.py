@@ -72,9 +72,9 @@ def get_words_single_file(filename):
     words = reduce(lambda left, right: list(left) + list(right), map_result)
     word_vec = []
     for word, tag in words:
-        if word not in stop_words_set and re.match(r'n|a.*|v.*', tag) and not re.match(r'nr|ns|nz', tag):
+        if word not in stop_words_set and re.match(r'n', tag) and not re.match(r'nr|ns|nz', tag):
             word_vec.append(word)
-            # print word, tag
+            # print word, tag_weight
     return word_vec
 
 

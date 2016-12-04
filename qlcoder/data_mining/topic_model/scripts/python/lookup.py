@@ -34,8 +34,8 @@ with open('output_tmp_res.txt') as my_ifs:
     label = []
     for i in range(8000):
         label.append(qlcoder_dict[my_dict[mark_lst[i]]])
-        if mark_lst[i] == 3:
-            with open('../8000_words/' + str(i) + '.txt') as ifs:
+        if mark_lst[i] == 0:
+            with open('../../8000_words/' + str(i) + '.txt') as ifs:
                 print str(i) + ','.join(map(lambda line: line.strip(), ifs.readlines()))
-    label = map(str, label)
-    print ''.join(label)
+    # label = map(str, label)
+    # print ''.join(label)

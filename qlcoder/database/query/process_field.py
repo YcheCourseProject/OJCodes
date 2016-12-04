@@ -1,4 +1,4 @@
-arr = ['id', 'price', 'saleNum', 'favNum', 'color', 'size', 'itemNum', 'created_at', 'dsr', 'tag']
+arr = ['id', 'price', 'saleNum', 'favNum', 'color', 'size', 'itemNum', 'created_at', 'dsr', 'tag_weight']
 print len(arr)
 arr2 = [(i, arr[i]) for i in range(len(arr))]
 print arr2
