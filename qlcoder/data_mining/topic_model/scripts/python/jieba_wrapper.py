@@ -3,9 +3,10 @@
 
 import re
 import jieba.analyse
+import os
 
 stop_words_set = set()
-stop_file_name = '../cn_stop_words.txt'
+stop_file_name = '../../cn_stop_words.txt'
 
 noise_words_first = ['可能与主题无关的词', 'badcase', '噪音词', ]
 noise_words_second = ['IT', '健康', '体育', '旅游', '教育', '文化', '军事', '财经']
@@ -72,7 +73,7 @@ def get_words_single_file(filename):
     words = reduce(lambda left, right: list(left) + list(right), map_result)
     word_vec = []
     for word, tag in words:
-        if word not in stop_words_set and re.match(r'n', tag) and not re.match(r'nr|ns|nz', tag):
+        if word not in stop_words_set and re.match(r'n.*|v.*|a.*', tag) and not re.match(r'nr|ns|nz', tag):
             word_vec.append(word)
             # print word, tag_weight
     return word_vec
@@ -80,21 +81,20 @@ def get_words_single_file(filename):
 
 def get_sorted_lines():
     for i in range(8000):
-        lines = remove_duplicate(get_lines_single_file('../8000/' + str(i) + '.txt'))
-        with open('../8000_copy/' + str(i) + '.txt', 'w') as ofs:
+        lines = remove_duplicate(get_lines_single_file('../../8000/' + str(i) + '.txt'))
+        with open('../../8000_copy/' + str(i) + '.txt', 'w') as ofs:
             ofs.write('\n'.join(lines))
 
 
 def get_words():
     for i in range(8000):
-        words = get_words_single_file('../8000/' + str(i) + '.txt')
+        words = get_words_single_file('../../8000/' + str(i) + '.txt')
         write_words = '\n'.join(words)
         write_words = write_words.encode('utf-8')
-        with open('../8000_words/' + str(i) + '.txt', 'w') as ofs:
+        with open('../../8000_words/' + str(i) + '.txt', 'w') as ofs:
             ofs.write(write_words)
 
 
 init_stop_words_set(stop_file_name)
 get_words()
-# get_sorted_lines()
-# print all_eng_count
+get_sorted_lines()

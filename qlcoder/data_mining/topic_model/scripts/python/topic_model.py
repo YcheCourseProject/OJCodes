@@ -23,13 +23,13 @@ if __name__ == '__main__':
     print len(corpus_list)
 
     # Tfidf模型 计算对应空间向量
-    tfidf = models.TfidfModel(corpus_list)
-    corpus_tfidf = tfidf[corpus_list]
-    print len(corpus_tfidf)
+    # tfidf = models.TfidfModel(corpus_list)
+    # corpus_tfidf = tfidf[corpus_list]
+    # print len(corpus_tfidf)
 
     # LDA, 降低维度
-    lda = models.ldamodel.LdaModel(corpus=corpus_tfidf, id2word=word_dict, num_topics=8, alpha='auto')
-    corpus_lda = lda[corpus_tfidf]
+    lda = models.ldamodel.LdaModel(corpus=corpus_list, id2word=word_dict, num_topics=50, alpha='auto')
+    corpus_lda = lda[corpus_list]
     print 'finish lda'
 
     # K-means, 聚类
