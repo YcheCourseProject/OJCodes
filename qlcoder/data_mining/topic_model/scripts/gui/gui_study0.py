@@ -39,6 +39,12 @@ def get_word_list():
     return word_list
 
 
+def get_choice_list():
+    with open('eval_result.txt') as ifs:
+        line = ifs.readline()
+    return eval(line)
+
+
 def get_text_list():
     text_list = []
     for i in range(8000):
@@ -53,11 +59,13 @@ class App0:
         frame = tk.Frame(master)
         frame.pack()
 
+        # data
         self.question_idx = 0
         self.word_list = get_word_list()
         self.text_list = get_text_list()
-        self.count = 0
+        self.choice_list = get_choice_list()
 
+        # controls
         self.text_key_words = ScrolledText(frame)
         self.text_key_words.pack(side=tk.LEFT)
 
@@ -79,15 +87,42 @@ class App0:
         self.btn_next = tk.Button(frame, text='下一题', height=2, command=self.question_callback('next'))
         self.btn_next.pack()
 
+        self.btn_save = tk.Button(frame, text='保存', height=2, command=self.save)
+        self.btn_save.pack()
+
         self.button = tk.Button(frame, text='退出', height=2, fg='red', command=frame.quit)
         self.button.pack()
+
+        self.question_label = tk.Label(frame, text='题号:')
+        self.question_label.pack()
+
+        self.question_number = tk.Text(frame, height=5, width=5)
+        self.question_number.pack()
+
+        self.update_content()
+
+    def save(self):
+        with open('eval_result.txt', 'w') as ofs:
+            save_list = map(str, self.choice_list)
+            ofs.write('[' + ','.join(save_list) + ']')
+            print 'finish saving'
 
     def select_callback(self, ele):
         def test():
             print 'test' + str(ele)
             print 'var:' + str(self.category_btn_var.get())
+            self.choice_list[self.question_idx] = self.category_btn_var.get()
 
         return test
+
+    def update_content(self):
+        self.question_number.delete(1.0, tk.END)
+        self.question_number.insert(tk.END, str(self.question_idx))
+        self.text_key_words.delete(1.0, tk.END)
+        self.text_key_words.insert(tk.END, ','.join(self.word_list[self.question_idx]))
+        self.text_whole_text.delete(1.0, tk.END)
+        self.text_whole_text.insert(tk.END, ''.join(self.text_list[self.question_idx]))
+        self.radio_btn_lst[self.choice_list[self.question_idx] - 1].select()
 
     def question_callback(self, indicate_str):
         def say_hi():
@@ -99,12 +134,7 @@ class App0:
                 print 'error'
             self.question_idx %= 8000
 
-            self.count += 1
-            print indicate_str, self.count
-            self.text_key_words.delete(1.0, tk.END)
-            self.text_key_words.insert(tk.END, ','.join(self.word_list[self.question_idx]))
-            self.text_whole_text.delete(1.0, tk.END)
-            self.text_whole_text.insert(tk.END, ''.join(self.text_list[self.question_idx]))
+            self.update_content()
 
         return say_hi
 
