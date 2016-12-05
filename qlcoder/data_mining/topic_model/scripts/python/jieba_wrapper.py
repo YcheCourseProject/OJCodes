@@ -96,5 +96,6 @@ def get_words():
 
 
 init_stop_words_set(stop_file_name)
-get_words()
 get_sorted_lines()
+get_words()
+
