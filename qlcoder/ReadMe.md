@@ -1,17 +1,25 @@
 #qlcoder study materials
 
-##Content Category
-- [algorithms_data_structures](algorithms_data_structures)
-- [cryptography](cryptography)
-- [data_mining](data_mining)
-- [debug_tools](debug_tools)
-- [distributed_system](distributed_system)
-- [filesystem](filesystem)
-- [front-end](front-end)
-- [game](game)
-- [image_processing](image_processing)
-- [network](network)
-- [reverse_proj](reverse_proj)
-- [serialization](serialization)
+##Algorithms
+- [algorithms](algorithms), search, max flow, pack, sort
 
-##Notes
+##Cryptography
+- [cryptography](cryptography), substitution cipher, rsa public-key cipher
+
+##Data Mining
+- [data_mining](data_mining)
+
+##Debug
+- [debug_tools](debug_tools)
+
+##Distributed System
+- [distributed_system](distributed_system)
+
+##File System
+- [filesystem](filesystem)
+
+##Image Processing
+- [image_processing](image_processing)
+
+##Network
+- [network](network)
