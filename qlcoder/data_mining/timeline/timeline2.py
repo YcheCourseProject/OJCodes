@@ -47,7 +47,6 @@ def verbose_time_line(vertex_index):
         vertex_list[vertex_index] = list()
 
 
-
 def notify_message(vertex_index, message_str):
     if my_primes.__contains__(vertex_index):
         for listeners_index in range(1, vertex_index):

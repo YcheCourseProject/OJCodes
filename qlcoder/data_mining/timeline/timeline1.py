@@ -43,7 +43,7 @@ def notify_message(vertex_index, message_str):
         notified_vertex_index = times_count * vertex_index
 
 
-for i in range(limit):
+for i in xrange(limit):
     r = random.randint(1, limit)
     if i < 10:
         print r
@@ -53,7 +53,7 @@ for i in range(limit):
     else:
         verbose_time_line(r)
 
-    if i == 99 or i == 299 or i == 999 :
+    if i == 99 or i == 299 or i == 999:
         print '-'.join(global_digest_list) + ':'
         print str(i) + ':' + compute_md5(global_digest_list)
 print 'Over'
