@@ -5,7 +5,7 @@ OJ Codes Repo
 
 - [qlcoder](qlcoder)
 
-category | detail
+category information | detail
 --- | ---
 Algorithms | graph algorithms, number theory, pack, search, sort
 Cryptography | crack 75ed, rsa cipher, fence ciphe
