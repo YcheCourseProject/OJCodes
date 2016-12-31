@@ -49,8 +49,8 @@ def transform(data_ele, type_list):
 
 def get_train_test_data():
     type_list = get_feature_category_list()
-    training_arr = np.loadtxt('../dataset/train_adult.txt', str, '#', ',')
-    feature_test_list = np.loadtxt('../dataset/test_adult.txt', str, '#', ',')
+    training_arr = np.loadtxt('dataset/train_adult.txt', str, '#', ',')
+    feature_test_list = np.loadtxt('dataset/test_adult.txt', str, '#', ',')
 
     feature_train_list = map(lambda ele: map(lambda x: transform(x, type_list), ele[0:12]), training_arr)
     label_list = map(lambda ele: int(ele[12]), training_arr)

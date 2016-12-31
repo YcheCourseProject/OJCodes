@@ -2,8 +2,8 @@ import numpy as np
 from sklearn.naive_bayes import GaussianNB
 
 if __name__ == '__main__':
-    training_arr = np.loadtxt('../dataset/train0.txt', str, '#', ' ')
-    testing_arr = np.loadtxt('../dataset/check0.txt', str, '#', ' ')
+    training_arr = np.loadtxt('dataset/train0.txt', str, '#', ' ')
+    testing_arr = np.loadtxt('dataset/check0.txt', str, '#', ' ')
 
     arr_y = map(lambda ele: int(ele[11]), training_arr)
     arr_x = map(lambda ele: map(lambda x: float(x), ele[1:10]), training_arr)
