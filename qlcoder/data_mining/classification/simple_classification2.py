@@ -18,4 +18,4 @@ res_arr = clf.predict(testing_arr)
 
 print res_arr
 
-print reduce(lambda x, y: str(x) + str(y), res_arr)
+print ''.join(res_arr)
