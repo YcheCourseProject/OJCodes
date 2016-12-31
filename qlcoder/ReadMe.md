@@ -1,10 +1,22 @@
 #qlcoder study materials
 
 ##Algorithms
-- [algorithms](algorithms), search, max flow, pack, sort
+
+content | detail
+--- | ---
+[graph algorithms](algorithms/graph) | connected components and max-flow 
+[number theory](algorithms/number_theory) | prime related
+[pack](algorithms/pack) | pack problem
+[search](algorithms/search) | depth-first-search algorithms, robot and modulo
+[sort](algorithms/sort) | sort algorithms
 
 ##Cryptography
-- [cryptography](cryptography), substitution cipher, rsa public-key cipher
+
+content | detail
+--- | ---
+[crack 75ed](cryptography/crack_cipher_75ed) | crack 75ed cipher
+[rsa cipher](cryptography/rsa_cipher) | rsa cipher
+[fence cipher](cryptography/substitution_cipher) | substitution and transposition cipher
 
 ##Data Mining
 - [data_mining](data_mining)
@@ -21,5 +33,11 @@
 ##Image Processing
 - [image_processing](image_processing)
 
+##Language
+- [language](language)
+
 ##Network
 - [network](network)
+
+##Serialization
+- [serialization](serialization)
