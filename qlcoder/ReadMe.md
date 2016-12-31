@@ -32,9 +32,6 @@ content | detail
 [word processing](data_mining/word_processing) | word processing with linux dictionary
 [words to pinyin](data_mining/words_to_pinyin) | ruby package usage for piniyin recognization
 
-##Debug
-- [debug_tools](debug_tools)
-
 ##Distributed System
 - [distributed_system](distributed_system)
 
@@ -52,3 +49,12 @@ content | detail
 
 ##Serialization
 - [serialization](serialization)
+
+##Others
+
+content | detail
+--- | ---
+[debug](other/debug) | debug with gcc and code review with java
+[game](other/game) | a game in python3
+[reverse project](other/reverse_proj) | reverse project of java and `.swf`
+[scheme study](other/scheme_study) | scheme study, comparison with c++ and python
