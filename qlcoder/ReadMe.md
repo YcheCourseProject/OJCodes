@@ -19,7 +19,18 @@ content | detail
 [fence cipher](cryptography/substitution_cipher) | substitution and transposition cipher
 
 ##Data Mining
-- [data_mining](data_mining)
+
+content | detail 
+--- | ---
+[classification](data_mining/classification) | basic classification demo with naive bayes
+[collaborative filtering and lda](data_mining/collaborative_filtering_and_lda) | collaborative filtering, lda demo with java lib mahout
+[hidden markov](data_mining/hidden_markov) | hidden markov demo
+[jieba](data_mining/jieba_package_demo) | jieba python module usage
+[numerical computation](data_mining/numerical_calculation) | numerical computation, e.g, polyfit and intergral
+[topic model](data_mining/topic_model) | topic model with lda
+[tranform matrix](data_mining/transform_matrix) | transform matrix applied on population
+[word processing](data_mining/word_processing) | word processing with linux dictionary
+[words to pinyin](data_mining/words_to_pinyin) | ruby package usage for piniyin recognization
 
 ##Debug
 - [debug_tools](debug_tools)
