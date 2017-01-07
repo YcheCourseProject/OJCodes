@@ -1,4 +1,5 @@
 import random
+import unittest
 
 
 # in place sorting
@@ -28,14 +29,15 @@ def quick_sort_detail(num_list, begin, end):
                 return
 
 
-def test_quick_sort():
-    for i in range(10):
-        my_list = range(i)
-        random.shuffle(my_list)
-        print my_list
-        quick_sort(my_list)
-        print my_list
+class TestQuickSort(unittest.TestCase):
+    def test_quick_sort(self):
+        for i in range(100):
+            my_list = range(i)
+            expected_list = range(i)
+            random.shuffle(my_list)
+            quick_sort(my_list)
+            self.assertListEqual(my_list, expected_list)
 
 
 if __name__ == '__main__':
-    test_quick_sort()
+    unittest.main()
