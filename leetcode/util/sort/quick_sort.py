@@ -2,7 +2,6 @@ import random
 import unittest
 
 
-# in place sorting
 def quick_sort(num_list):
     if len(num_list) > 1:
         quick_sort_detail(num_list, 0, len(num_list))

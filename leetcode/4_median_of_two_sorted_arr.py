@@ -5,7 +5,6 @@ class NaiveSolution(object):
         idx_left = 0
         idx_right = 0
         while idx_left < len(left) or idx_right < len(right):
-            print idx_left, idx_right
             if idx_right == len(right):
                 nums3.append(left[idx_left])
                 idx_left += 1
@@ -27,7 +26,7 @@ class NaiveSolution(object):
         :type nums2: List[int]
         :rtype: float
         """
-        nums3 = NaiveSolution.merge_two(left, right)
+        nums3 = NaiveSolution.merge_t78uwo(left, right)
         return (nums3[(len(nums3) - 1) / 2] + nums3[len(nums3) / 2]) / 2
 
 
