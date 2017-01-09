@@ -18,3 +18,12 @@ Language | front-end, elambda, ik-language, qll, quine
 Network | openssl, pcap, phantomjs, spider, taobaoip
 Serialization | base64, bwt, byte array compression, file prefix, huffman tree, key-value store, protobuf
 Others | debug, game, reverse project, scheme-study
+
+##LeetCode
+
+- [leetcode](leetcode), [leetcode website](https://leetcode.com/problemset/algorithms/)
+
+category | detail
+--- | ---
+util | sort, k_th_ele, bin_search
+answers | answers to questions
