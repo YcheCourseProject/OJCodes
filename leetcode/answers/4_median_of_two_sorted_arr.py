@@ -45,19 +45,28 @@ class Solution(object):
                 return Solution.binary_search_latter_idx_detail(num_list, med_idx + 1, end, target_val, med_idx)
 
     @staticmethod
-    def binary_search_latter_idx(num_list, target_val):
-        return Solution.binary_search_latter_idx_detail(num_list, 0, len(num_list), target_val, len(num_list))
-
-    @staticmethod
     def find_kth_element_detail(left, l_beg, l_end, right, r_beg, r_end, k):
-        return
+        if r_end == r_beg:
+            return left[l_beg + k]
+        else:
+            r_med_idx = (r_beg + r_end) / 2
+            r_med_val = right[r_med_idx]
+            l_split_idx = Solution.binary_search_latter_idx_detail(left, l_beg, l_end, r_med_val, l_end)
+            first_half_size = r_med_idx - r_beg + l_split_idx - l_beg
+            if first_half_size == k:
+                return r_med_val
+            elif first_half_size < k:
+                return Solution.find_kth_element_detail(left, l_split_idx, l_end, right, r_med_idx + 1, r_end,
+                                                        k - first_half_size - 1)
+            else:
+                return Solution.find_kth_element_detail(left, l_beg, l_split_idx, right, r_beg, r_med_idx, k)
 
     @staticmethod
     def find_kth_element(left, right, k):
-        Solution.find_kth_element_detail(left, 0, len(left), right, 0, len(right), k)
+        return float(Solution.find_kth_element_detail(left, 0, len(left), right, 0, len(right), k))
 
     def findMedianSortedArrays(self, left, right):
-        whole_len = len(left) + left(right)
+        whole_len = len(left) + len(right)
         if whole_len % 2 == 1:
             return Solution.find_kth_element(left, right, whole_len / 2)
         else:
@@ -69,3 +78,4 @@ if __name__ == '__main__':
     nums1 = [1, 2]
     nums2 = [3, 4]
     print NaiveSolution().findMedianSortedArrays(nums1, nums2)
+    print Solution().findMedianSortedArrays(nums1, nums2)
