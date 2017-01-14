@@ -30,6 +30,24 @@ class NaiveSolution(object):
         return (nums3[(len(nums3) - 1) / 2] + nums3[len(nums3) / 2]) / 2
 
 
+class Solution(object):
+    @staticmethod
+    def find_kth_element_detail(left, l_beg, l_end, right, r_beg, r_end, k):
+        return
+
+    @staticmethod
+    def find_kth_element(left, right, k):
+        Solution.find_kth_element_detail(left, 0, len(left), right, 0, len(right), k)
+
+    def findMedianSortedArrays(self, left, right):
+        whole_len = len(left) + left(right)
+        if whole_len % 2 == 1:
+            return Solution.find_kth_element(left, right, whole_len / 2)
+        else:
+            return (Solution.find_kth_element(left, right, whole_len / 2) +
+                    Solution.find_kth_element(left, right, (whole_len - 1) / 2)) / 2
+
+
 if __name__ == '__main__':
     nums1 = [1, 2]
     nums2 = [3, 4]
