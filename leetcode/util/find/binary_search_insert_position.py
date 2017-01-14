@@ -2,7 +2,7 @@ import random
 import unittest
 
 
-def binary_search_detail(num_list, begin, end, target_val, alternative_idx):
+def binary_search_latter_idx_detail(num_list, begin, end, target_val, alternative_idx):
     if begin == end:
         return max(begin, alternative_idx)
     else:
@@ -10,13 +10,13 @@ def binary_search_detail(num_list, begin, end, target_val, alternative_idx):
         if target_val == num_list[med_idx]:
             return med_idx
         elif target_val < num_list[med_idx]:
-            return binary_search_detail(num_list, begin, med_idx, target_val, med_idx)
+            return binary_search_latter_idx_detail(num_list, begin, med_idx, target_val, med_idx)
         else:
-            return binary_search_detail(num_list, med_idx + 1, end, target_val, med_idx)
+            return binary_search_latter_idx_detail(num_list, med_idx + 1, end, target_val, med_idx)
 
 
-def binary_search(num_list, target_val):
-    return binary_search_detail(num_list, 0, len(num_list), target_val, len(num_list))
+def binary_search_latter_idx(num_list, target_val):
+    return binary_search_latter_idx_detail(num_list, 0, len(num_list), target_val, len(num_list))
 
 
 class TestBinarySearch(unittest.TestCase):
@@ -25,7 +25,7 @@ class TestBinarySearch(unittest.TestCase):
             num_list = sorted(random.sample(range(100), 10))
             for i in range(10):
                 search_val = random.randint(-1, 100)
-                idx = binary_search(num_list, search_val)
+                idx = binary_search_latter_idx(num_list, search_val)
                 if idx == len(num_list):
                     self.assertTrue(search_val >= num_list[len(num_list) - 1])
                 elif idx == 0:

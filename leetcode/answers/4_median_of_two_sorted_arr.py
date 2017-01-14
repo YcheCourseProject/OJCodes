@@ -32,6 +32,23 @@ class NaiveSolution(object):
 
 class Solution(object):
     @staticmethod
+    def binary_search_latter_idx_detail(num_list, begin, end, target_val, alternative_idx):
+        if begin == end:
+            return max(begin, alternative_idx)
+        else:
+            med_idx = (begin + end) / 2
+            if target_val == num_list[med_idx]:
+                return med_idx
+            elif target_val < num_list[med_idx]:
+                return Solution.binary_search_latter_idx_detail(num_list, begin, med_idx, target_val, med_idx)
+            else:
+                return Solution.binary_search_latter_idx_detail(num_list, med_idx + 1, end, target_val, med_idx)
+
+    @staticmethod
+    def binary_search_latter_idx(num_list, target_val):
+        return Solution.binary_search_latter_idx_detail(num_list, 0, len(num_list), target_val, len(num_list))
+
+    @staticmethod
     def find_kth_element_detail(left, l_beg, l_end, right, r_beg, r_end, k):
         return
 
