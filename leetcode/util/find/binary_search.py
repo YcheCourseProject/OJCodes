@@ -21,7 +21,7 @@ def binary_search(num_list, target_val):
 
 class TestBinarySearch(unittest.TestCase):
     def test_binary_search_recursion(self):
-        range_num = 10
+        range_num = 100
         my_list = sorted(random.sample(range(0, 100), range_num))
         expected_list = range(range_num)
         res_list = [binary_search(my_list, my_list[i]) for i in range(range_num)]

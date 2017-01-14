@@ -26,7 +26,7 @@ class NaiveSolution(object):
         :type nums2: List[int]
         :rtype: float
         """
-        nums3 = NaiveSolution.merge_t78uwo(left, right)
+        nums3 = NaiveSolution.merge_two(left, right)
         return (nums3[(len(nums3) - 1) / 2] + nums3[len(nums3) / 2]) / 2
 
 
