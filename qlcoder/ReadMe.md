@@ -1,16 +1,16 @@
-#qlcoder study materials
+# qlcoder study materials
 
-##Algorithms
+## Algorithms
 
 content | detail
 --- | ---
-[graph algorithms](algorithms/graph) | connected components and max-flow 
+[graph algorithms](algorithms/graph) | connected components and max-flow
 [number theory](algorithms/number_theory) | prime related
 [pack](algorithms/pack) | pack problem
 [search](algorithms/search) | depth-first-search algorithms, robot and modulo
 [sort](algorithms/sort) | sort algorithms
 
-##Cryptography
+## Cryptography
 
 content | detail
 --- | ---
@@ -18,9 +18,9 @@ content | detail
 [rsa cipher](cryptography/rsa_cipher) | rsa cipher
 [fence cipher](cryptography/substitution_cipher) | substitution and transposition cipher
 
-##Data Mining
+## Data Mining
 
-content | detail 
+content | detail
 --- | ---
 [classification](data_mining/classification) | basic classification demo with naive bayes
 [collaborative filtering and lda](data_mining/collaborative_filtering_and_lda) | collaborative filtering, lda demo with java lib mahout
@@ -33,40 +33,40 @@ content | detail
 [word processing](data_mining/word_processing) | word processing with linux dictionary
 [words to pinyin](data_mining/words_to_pinyin) | ruby package usage for piniyin recognization
 
-##Distributed System
+## Distributed System
 
-content | detail 
+content | detail
 --- | ---
 [docker](distributed_system/docker) | basic dockerfile and docker commands
 [zookeeper](distributed_system/zookeeper_study) | basic zookeeper client usage
 
-##File System
+## File System
 
-content | detail 
+content | detail
 --- | ---
 [python scripts for fs](file_system/python) | python utils
 [shell scripts for fs](file_system/shells) | shell utils
 
-##Image Processing
+## Image Processing
 
-content | detail 
+content | detail
 --- | ---
 [flood fill](image_processing/floodfill) | flood fill algorithm
 [image similarity](image_processing/image_similarity) | image similarity
 [png, bmp](image_processing/png_bmp) | png and bmp related processing
 
-##Language
+## Language
 
-content | detail 
+content | detail
 --- | ---
 [front-end](language/front-end) | xss, css, sass
 [elambda](language/functional/elambda) | elambda, similar to scheme
 [ik-language](language/functional/ik_language) | ik-language, typing system
 [qll](language/functional/qll) | qll, similar to asm
-[quine](language/functional/quine) | quine 
+[quine](language/functional/quine) | quine
 
-##Network
-content | detail 
+## Network
+content | detail
 --- | ---
 [openssl](network/openssl) | openssl usage
 [pcap](network/pcap) | pcap usage
@@ -75,11 +75,11 @@ content | detail
 [taobaoip](network/taobao_ip) | ip database related
 [usefull shells](network/userful_shells) | useful shells for network
 
-##Serialization
+## Serialization
 
-content | detail 
+content | detail
 --- | ---
-[base64](serialization/encodedecode/base64) | based64 
+[base64](serialization/encodedecode/base64) | based64
 [bwt](serialization/encodedecode/bwt) | bwt algorithm
 [byte_arr](serialization/encodedecode/bytes_arr) | byte array compression
 [file prefix](serialization/encodedecode/file_prefix) | generate fixed length file prefix, keeping original number order
@@ -87,7 +87,7 @@ content | detail
 [key-value store](serialization/key_value_store) | key value store with mmap
 [protobuf](serialization/protobuf) | protobuf usage
 
-##Others
+## Others
 
 content | detail
 --- | ---
