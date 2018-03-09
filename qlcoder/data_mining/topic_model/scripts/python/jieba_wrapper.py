@@ -91,6 +91,7 @@ def get_words():
         words = get_words_single_file('../../8000/' + str(i) + '.txt')
         write_words = '\n'.join(words)
         write_words = write_words.encode('utf-8')
+        os.system('mkdir -p ../../8000_words/')
         with open('../../8000_words/' + str(i) + '.txt', 'w') as ofs:
             ofs.write(write_words)
 
@@ -98,4 +99,3 @@ def get_words():
 init_stop_words_set(stop_file_name)
 get_sorted_lines()
 get_words()
-
